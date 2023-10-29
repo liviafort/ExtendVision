@@ -1,10 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask
+from routes import app_routes
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return render_template("home/home.html")
-    
-if __name__ == "__main__":
-    app.run(debug=True)
+app.config['DEBUG'] = True
+app.config['SECRET_KEY'] = 'sua_chave_secreta'
+
+app.register_blueprint(app_routes)
+
+if __name__ == '__main__':
+    app.run()
