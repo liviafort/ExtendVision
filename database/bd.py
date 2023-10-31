@@ -2,13 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy import Column, Integer, String, Date, ForeignKey
 
-#Primeiro passo: antes de rodar esse código é criar o databse na sua máquina com o nome 'extendvision'
-#Segundo passo: o db_uri é a rota do database no seu computador, caso seja diferente apenas mude a rota da váriavel
-db_uri = "mysql://root:root@localhost/extendvision"
-engine = create_engine(db_uri)
 
-#Declaração das classes ligadas as tabelas do database
+db_uri = "mysql://root:admin@localhost/extendvision"
+engine = create_engine(db_uri)
 Base = declarative_base()
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -22,11 +20,13 @@ class User(Base):
     birth_date = Column(Date, nullable=False)
     type = Column(String(50), nullable=False)
 
+
 class Field(Base):
     __tablename__ = 'field'
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     field = Column(String(50), nullable=False)
+
 
 class Project(Base):
     __tablename__ = 'project'
@@ -48,6 +48,7 @@ class Project(Base):
     professor = relationship('User', foreign_keys=[id_professor])
     field_rel = relationship('Field', foreign_keys=[id_field])
 
+
 class ProjectStudents(Base):
     __tablename__ = 'project_students'
     
@@ -57,4 +58,6 @@ class ProjectStudents(Base):
     project = relationship('Project', foreign_keys=[id_project])
     user = relationship('User', foreign_keys=[id_user])
 
-Base.metadata.create_all(engine)
+
+if __name__ == '__main__':
+    Base.metadata.create_all(engine)
