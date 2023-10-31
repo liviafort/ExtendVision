@@ -1,11 +1,6 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Date, ForeignKey
-
-
-db_uri = "mysql://root:admin@localhost/extendvision"
-engine = create_engine(db_uri)
-Base = declarative_base()
+from database.engine import Base, engine
 
 
 class User(Base):
