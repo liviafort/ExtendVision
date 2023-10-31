@@ -10,5 +10,20 @@ def get_user_by_id(user_id):
     return user
 
 
+def create_user(registration, password, name, title, gender, birth_date, type):
+    new_user = User(
+        registration=registration,
+        password=password,
+        name=name,
+        title=title,
+        gender=gender,
+        birth_date=birth_date,
+        type=type
+    )
+
+    session.add(new_user)
+    session.commit()
+    return new_user.id
+
 if __name__ == '__main__':
     pass
