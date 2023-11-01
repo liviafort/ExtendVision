@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/users/sign.css') }}">
+    <title>Entrar</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-image">
+            <img src="{{url_for('static', filename='img/signup-pic.jpg')}}" alt="">
+        </div>
+        <div class="form">
+            <form action="#">
+
+                <div class="form-header">
+                    <div class="title">
+                        <h1>Entre na sua conta</h1>
+                    </div>
+                    <div class="login-button" style="padding-left: 30px;">
+                      <button><a href="#">Criar conta</a></button>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="input-box">
+                        <label for="firstname">Matrícula</label>
+                        <input id="firstname" type="text" name="firstname" placeholder="Digite seu primeiro nome" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="password">Senha</label>
+                        <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="confirmPassword">Confirme sua Senha</label>
+                        <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" required>
+                    </div>
+
+                </div>
+
+                <div class="continue-button">
+                    <button><a href="#">Entrar</a> </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
