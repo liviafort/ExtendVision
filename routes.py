@@ -1,8 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request
 from models.users import get_user_by_id, create_user, update_user, delete_user
 
-from database import bd2
-
 app_routes = Blueprint('app_routes', __name__)
 
 
