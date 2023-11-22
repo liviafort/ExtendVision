@@ -1,46 +1,49 @@
-from database.bd import User, engine
-from sqlalchemy.orm import sessionmaker
+from database.supabd import supabase
 from flask import jsonify
 
-Session = sessionmaker(bind=engine)
-session = Session()
-
-
 def get_user_by_id(user_id):
-    user = session.query(User).filter_by(id=user_id).first()
-    user_dict = user.__dict__
-    user_dict.pop('_sa_instance_state', None)
-    return jsonify(user_dict)
+    data = supabase.table("User").select("*").eq("id",user_id).execute()
+    data = data.__dict__
+    return data['data'][0]
 
-def create_user(registration, password, name, title, gender, birth_date, type):
-    new_user = User(
-        registration=registration,
-        password=password,
-        name=name,
-        title=title,
-        gender=gender,
-        birth_date=birth_date,
-        type=type
-    )
+def get_user_by_email(user_email):
+    data = supabase.table("User").select("*").eq("email",user_email).execute()
+    data = data.__dict__
+    return data['data'][0]
 
-    session.add(new_user)
-    session.commit()
-    return new_user.id
+def get_users():
+    data = supabase.table("User").select("*").execute()
+    data = data.__dict__
+    return data['data']
 
-def update_user(user_id, registration, password, name, title, gender, birth_date, type):
-    session.query(User).filter(User.id==user_id).update({"registration": registration,
-        "password": password,
-        "name": name,
-        "title": title,
-        "gender": gender,
-        "birth_date": birth_date,
-        "type": type})
-    session.commit()
+def create_user(registration, password, name, title, gender, birth, email):
+    data = supabase.table("User").insert({'registration':registration,
+        'password':password,
+        'name':name,
+        'title':title,
+        'gender':gender,
+        'birth':birth,
+        'email':email}).execute()
+    
+    data = data.__dict__
+    return data['data'][0]['id']
+    
+def update_user(user_id, registration, password, name, title, gender, birth, email):
+    data = supabase.table("User").update({'registration':registration,
+        'password':password,
+        'name':name,
+        'title':title,
+        'gender':gender,
+        'birth':birth,
+        'email':email}).eq('id', user_id).execute()
+    
+    data = data.__dict__
+    return data['data'][0]['id']
 
 def delete_user(user_id):
-    session.query(User).filter(User.id==user_id).delete()
-    session.commit()
-    return str(user_id)
+    data = supabase.table("User").delete().eq("id", user_id).execute()
+    data = data.__dict__
+    return data['data'][0]
 
 if __name__ == '__main__':
     pass

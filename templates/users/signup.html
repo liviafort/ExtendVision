@@ -15,20 +15,17 @@
             <img src="{{url_for('static', filename='img/signup-pic.jpg')}}" alt="">
         </div>
         <div class="form">
-            <form action="#">
+            <form action="/user/getregister" method="post">
                 <div class="form-header">
                     <div class="title">
                         <h1>Cadastre-se</h1>
-                    </div>
-                    <div class="login-button">
-                        <button><a href="#">Entrar</a></button>
                     </div>
                 </div>
 
                 <div class="input-group">
                     <div class="input-box">
                         <label for="firstname">Nome</label>
-                        <input id="firstname" type="text" name="firstname" placeholder="Digite seu primeiro nome" required>
+                        <input id="firstname" type="text" name="firstname" placeholder="Digite seu nome completo" required>
                     </div>
 
                     <div class="input-box">
@@ -41,44 +38,52 @@
                         <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
                     </div>
 
-
                     <div class="input-box">
                         <label for="confirmPassword">Confirme sua Senha</label>
                         <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" required>
                     </div>
 
-                </div>
-
-                <div class="gender-inputs">
-                    <div class="gender-title">
-                        <h6>Gênero</h6>
+                    <div class="input-box">
+                        <label for="registration">Matrícula</label>
+                        <input id="registration" type="text" name="registration" placeholder="Digite sua matrícula" required>
                     </div>
 
-                    <div class="gender-group">
-                        <div class="gender-input">
-                            <input id="female" type="radio" name="gender">
-                            <label for="female">Feminino</label>
-                        </div>
+                    <div class="input-box">
+                        <label for="birth">Data da nascimento</label>
+                        <input id="birth" type="date" name="birth" placeholder="Sua data de nascimento" required>
+                    </div>
 
-                        <div class="gender-input">
-                            <input id="male" type="radio" name="gender">
-                            <label for="male">Masculino</label>
+                    <div class="gender-inputs">
+                        <div class="gender-title">
+                            <h6>Gênero</h6>
                         </div>
-
-                        <div class="gender-input">
-                            <input id="others" type="radio" name="gender">
-                            <label for="others">Outros</label>
+                        <div class="gender-group">
+                            <select id="opcao" name="gender">
+                                <option value="">Não Selecionado</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="outro">Outro</option>
+                                <option value="prefiro nao dizer">Prefiro não dizer</option>
+                            </select>
                         </div>
-
-                        <div class="gender-input">
-                            <input id="none" type="radio" name="gender">
-                            <label for="none">Prefiro não dizer</label>
+                    </div>
+                    
+                    <div class="gender-inputs">
+                        <div class="gender-title">
+                            <h6>Titutação</h6>
+                        </div>
+                        <div class="gender-group">
+                            <select id="opcao" name="title">
+                                <option value="">Não Selecionado</option>
+                                <option value="student">Estudante</option>
+                                <option value="teacher">Professor(a)</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
                 <div class="continue-button">
-                    <button><a href="#">Continuar</a> </button>
+                    <button type="submit"><a href="#">Continuar</a> </button>
                 </div>
             </form>
         </div>

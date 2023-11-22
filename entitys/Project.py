@@ -1,6 +1,5 @@
 from entitys.User import User
 
-
 class Project:
     def __init__(self, title, area, theme, resume, teacher,  workload, vaga, remuneration, init, end, init_registration, end_registration):
         self.title = title
