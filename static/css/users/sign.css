@@ -129,6 +129,7 @@ body {
 
 .gender-group {
     display: flex;
+    /* flex-wrap: wrap; */
     justify-content: space-between;
     margin-top: 0.62rem;
     padding: 0 .5rem;
@@ -144,6 +145,29 @@ body {
 }
 
 .gender-input label {
+    font-size: 0.81rem;
+    font-weight: 600;
+    color: #000000c0;
+}
+
+.title-group {
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    margin-top: 0.62rem;
+    padding: 0 .5rem;
+}
+
+.title-inputs {
+    display: flex;
+    align-items: center;
+}
+
+.title-inputs input {
+    margin-right: 0.35rem;
+}
+
+.title-inputs label {
     font-size: 0.81rem;
     font-weight: 600;
     color: #000000c0;
