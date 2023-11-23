@@ -6,7 +6,6 @@ class Register:
     def __init__(self, data):
         self.__data = data
         print("ENTROU NA CLASSE")
-        print(self.__data['title'])
 
     def valida_email(self):
         """Verifica se é um email acadêmico do IFPB"""
@@ -43,7 +42,7 @@ class Register:
                  print("LINHA CRIADA")
                  return response.json(), True
             
-            return response.json(), False
+            return response.json(), False 
 
         except Exception as e:
             print(e)

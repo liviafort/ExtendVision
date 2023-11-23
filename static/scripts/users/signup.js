@@ -3,25 +3,24 @@ const button_criar_conta = document.getElementById("signup");
 button_criar_conta.addEventListener("click", (e) =>{
   e.preventDefault();
 
-  const password = document.getElementById("password").valeu;
-  const confirmPassword = document.getElementById("confirmPassword").valeu;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
   if(password === confirmPassword){
 
-    const selectBirth = document.querySelector('#birth');
-    const selectTitle = document.querySelector('#title');
+    const selectGender = document.querySelector('#gender');
 
     const jsonRegister = {
-      "email": document.getElementById("email").valeu,
-      "firstname": document.getElementById("firstname").valeu,
+      "email": document.getElementById("email").value,
+      "name": document.getElementById("firstname").value,
       "password": password,
-      "gender": document.getElementById("gender").valeu,
-      "registration": document.getElementById("registration").valeu,
-      "birth": selectBirth.options[selectBirth.selectedIndex].value,
-      "title": selectTitle.options[selectTitle.selectedIndex].value,
+      "gender": selectGender.options[selectGender.selectedIndex].value,
+      "registration": document.getElementById("registration").value,
+      "birth": document.getElementById("birth").value,
     }
   
-    fetch("127.0.0.1:3000/user/getregister", {
+    console.log(jsonRegister)
+    fetch("http://127.0.0.1:5000/user/getregister", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -29,20 +28,28 @@ button_criar_conta.addEventListener("click", (e) =>{
       body: JSON.stringify(jsonRegister) 
     })
     .then(response => {
-      if (!response.ok) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: response.json(),
-        });
+      if (response.ok) {
+        response.json().then((data) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: data.works,
+            showConfirmButton: false,
+            timer: 1500
+          }).then(() =>{
+              window.location = "http://127.0.0.1:5000/"
+          })
+        })
+      }else{
+        response.json().then((data) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: data.error,
+            });
+        })
+
       }
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Conta criada com sucesso",
-        showConfirmButton: false,
-        timer: 1000
-      });
     })
     .catch(error => {
       Swal.fire({
@@ -56,7 +63,7 @@ button_criar_conta.addEventListener("click", (e) =>{
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: error,
+      text: "As senhas não coincidem"
     });
   }
 

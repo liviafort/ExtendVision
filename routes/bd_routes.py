@@ -7,7 +7,6 @@ from models.project_students import *
 #Rotas para banco de dados
 app_bd = Blueprint('app_bd', __name__)
 
-
 #CRUD USER
 @app_bd.route('/user/', methods=['GET'])
 def get_user():
