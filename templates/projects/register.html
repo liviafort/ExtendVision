@@ -186,7 +186,7 @@
                       <div class="card-body">
                         <div class="mb-3">
                           <label>Título</label>
-                          <input type="text" class="form-control" required="">
+                          <input id="titulo" type="text" class="form-control" required="">
                         </div>
                         <div class="mb-3">
                           <label>Área</label>
@@ -312,5 +312,7 @@
 	<!-- Template JS File -->
 	<script src="../../static/assets/js/script.js"></script>
 	<script src="../../static/assets/js/custom.js"></script>
+
+	<script src="{{ url_for('static', filename='scripts/project/register.js') }}"></script>
  </body>
 </html>

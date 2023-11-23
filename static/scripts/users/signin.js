@@ -9,12 +9,13 @@ button_criar_conta.addEventListener("click", (e) =>{
 button_login.addEventListener("click", (e) =>{
   e.preventDefault();
 
-  const jsonLogin = {
-    "email": document.getElementById("email").value,
-    "password": document.getElementById("password").value,
-  }
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value
 
-  console.log(jsonLogin)
+  const jsonLogin = {
+    "email": email,
+    "password": password
+  }
 
   fetch("http://127.0.0.1:5000/user/getlogin", {
     method: 'POST',
@@ -27,8 +28,11 @@ button_login.addEventListener("click", (e) =>{
     if(response.ok){
       response.json().then((data) => {
         if(data.user_type === "teacher"){
+          setCookie("email", email, 1);
           window.location = "http://127.0.0.1:5000/professor/home";
+
         }else if(data.user_type === "student"){
+          setCookie("email", email, 1);
           window.location = "http://127.0.0.1:5000/student/home";
         }
       })
@@ -52,3 +56,10 @@ button_login.addEventListener("click", (e) =>{
     });
   });
 });
+
+function setCookie(nome, valor, diasParaExpirar) {
+  var dataExpiracao = new Date();
+  dataExpiracao.setTime(dataExpiracao.getTime() + (diasParaExpirar * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + dataExpiracao.toUTCString();
+  document.cookie = nome + "=" + valor + ";" + expires + ";path=/";
+}
