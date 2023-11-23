@@ -7,6 +7,10 @@ class Register:
         self.__data = data
         print("ENTROU NA CLASSE")
 
+    def student_or_professor(self):
+        _, domain = self.__data['email'].split("@")
+        self.__data['title'] = 'student' if domain == 'academico.ifpb.edu.br' else 'teacher'
+
     def valida_email(self):
         """Verifica se é um email acadêmico do IFPB"""
         local_part, domain = self.__data['email'].split("@")
@@ -47,6 +51,32 @@ class Register:
         except Exception as e:
             print(e)
 
-    def student_or_professor(self):
-        _, domain = self.__data['email'].split("@")
-        self.__data['title'] = 'student' if domain == 'academico.ifpb.edu.br' else 'teacher'
+    def registrar_projeto(self):
+        response = requests.get(f"http://127.0.0.1:5000/user/?user_email={self.__data['email']}")
+        data = response.json()
+        self.__data['id_professor'] = data['id']
+
+        response = requests.get(f"http://127.0.0.1:5000/field/?field_name={self.__data['area']}")
+        data = response.json()
+        self.__data['id_field'] = data['id']
+
+        try:
+            dados = json.dumps(self.__data)
+            print("CRIANDO DADOS PARA INSERIR NO BANCO")
+            print(dados)
+
+            headers = {'Content-Type': 'application/json'}
+
+            response = requests.post("http://127.0.0.1:5000/field/", data=dados, headers=headers)
+            print("RESPONSE DO BD")
+            print(response)
+
+            if response.status_code == 200:
+                print("LINHA CRIADA")
+                return response.json(), True
+
+            return response.json(), False
+
+        except Exception as e:
+            print(e)
+

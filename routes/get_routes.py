@@ -44,4 +44,19 @@ def get_register():
             return jsonify({"works": "Conta criada com sucesso!"})
     
     return jsonify({"error": "Erro ao efetuar cadastro"}), 500
-    
+
+
+@app_get_routes.route("/user/getproject", methods=['POST'])
+def get_register_project():
+    """Rota para receber dados do formulário de criação de usuário"""
+    data = request.json
+    paramters = ['email', 'area', 'theme', 'title', 'description', 'begin_date', 'end_date', 'register_begin', 'register_end', 'workload', 'available_spots', 'scholarship']
+
+    if all([bool(data[key]) for key in paramters]):
+        register = Register(data)
+        message, its_work = register.registrar_projeto()
+
+        if its_work:
+            return jsonify({"works": "Projeto criada com sucesso!"})
+
+    return jsonify({"error": "Erro ao efetuar cadastro"}), 500
