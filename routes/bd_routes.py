@@ -7,6 +7,7 @@ from models.project_students import *
 #Rotas para banco de dados
 app_bd = Blueprint('app_bd', __name__)
 
+
 #CRUD USER
 @app_bd.route('/user/', methods=['GET'])
 def get_user():
@@ -27,6 +28,7 @@ def get_user():
         
     return get_users()
 
+
 @app_bd.route('/user/', methods=['POST'])
 def create_user_route():
     data = request.json
@@ -37,6 +39,7 @@ def create_user_route():
 
     return jsonify({'message': 'Novo usuário criado com sucesso', 'user_id': new_user_id})
 
+
 @app_bd.route('/user/<int:user_id>', methods=['PUT'])
 def update_user_route(user_id):
     data = request.json
@@ -46,6 +49,7 @@ def update_user_route(user_id):
     new_user_id = update_user(user_id, **data)
 
     return jsonify({'message': 'Usuário atualizado com sucesso', 'user_id': new_user_id})
+
 
 @app_bd.route('/user/<int:user_id>', methods=['DELETE'])
 def delete_users(user_id):
@@ -59,9 +63,11 @@ def delete_users(user_id):
 def get_project():
     return get_projects()
 
+
 @app_bd.route('/project/<int:project_id>', methods=['GET'])
 def get_proje_by_id(project_id):
     return get_project_by_id(project_id)
+
 
 @app_bd.route('/project/', methods=['POST'])
 def create_project_route():
@@ -73,6 +79,7 @@ def create_project_route():
 
     return jsonify({'message': 'Novo Projeto criado com sucesso', 'Project_id': new_project_id})
 
+
 @app_bd.route('/project/<int:project_id>', methods=['PUT'])
 def update_project_route(project_id):
     data = request.json
@@ -82,6 +89,7 @@ def update_project_route(project_id):
     new_project_id = update_project(project_id, **data)
 
     return jsonify({'message': 'Projeto atualizado com sucesso', 'project_id': new_project_id})
+
 
 @app_bd.route('/project/<int:project_id>', methods=['DELETE'])
 def delete_project_route(project_id):
@@ -94,9 +102,11 @@ def delete_project_route(project_id):
 def get_field_route():
     return get_fields()
 
+
 @app_bd.route('/field/<int:field_id>', methods=['GET'])
 def get_field_by_id_route(field_id):
     return get_field_by_id(field_id)
+
 
 @app_bd.route('/field/', methods=['POST'])
 def create_field_route():
@@ -108,6 +118,7 @@ def create_field_route():
 
     return jsonify({'message': 'Novo Campo adicionado com sucesso', 'Field_id': new_field_id})
 
+
 @app_bd.route('/field/<int:field_id>', methods=['PUT'])
 def update_field_route(field_id):
     data = request.json
@@ -117,6 +128,7 @@ def update_field_route(field_id):
     new_field_id = update_field(field_id,**data)
 
     return jsonify({'message': 'Campo atualizado com sucesso', 'Field_id': new_field_id})
+
 
 @app_bd.route('/field/<int:field_id>', methods=['DELETE'])
 def delete_field_route(field_id):
@@ -142,7 +154,8 @@ def get_project_students_route():
     else:
         #exemplo de url: http://127.0.0.1:5000/project_students
         return get_project_students()
-    
+
+
 @app_bd.route('/project_students/', methods=['POST'])
 def create_project_students_route():
     data = request.json
@@ -152,6 +165,7 @@ def create_project_students_route():
     new_project_students_id = create_project_student(**data)
 
     return jsonify({'message': 'Novo relação Projeto-Estudante criada', 'Project_id': new_project_students_id[0], 'User_id': new_project_students_id[1]})
+
 
 @app_bd.route('/project_students/', methods=['PUT'])
 def update_project_students_route():
@@ -170,6 +184,7 @@ def update_project_students_route():
         return jsonify({'message': 'Relação Projeto-Estudante Atualizada', 'Project_id': new_project_students_id[0], 'User_id': new_project_students_id[1]})
     
     return jsonify({'error': 'IDs não especificados'}), 400
+
 
 @app_bd.route('/project_students/', methods=['DELETE'])
 def delete_project_student_route():
