@@ -4550,8 +4550,6 @@ textarea.form-control-lg {
 
 .card-footer {
   padding: 0.5rem 1rem;
-  display: flex;
-  justify-content: flex-end;
   background-color: rgba(0, 0, 0, 0.03);
   border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
