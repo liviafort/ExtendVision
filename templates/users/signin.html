@@ -7,16 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/users/sign.css') }}">
     <title>Entrar</title>
-
-    <!-- <script>
-        // Verifica se há mensagens flash e exibe um pop-up se houver
-        document.addEventListener('DOMContentLoaded', function () {
-            var messages = "{{ get_flashed_messages() }}";
-            if (messages !== "") {
-                alert(messages);
-            }
-        });
-    </script> -->
 </head>
 
 <body>
@@ -25,14 +15,13 @@
             <img src="{{url_for('static', filename='img/signup-pic.jpg')}}" alt="">
         </div>
         <div class="form">
-            <form action="/users/getlogin" method="post">
-                
+            <form>
                 <div class="form-header">
                     <div class="title">
                         <h1>Entre na sua conta</h1>
                     </div>
                     <div class="login-button" style="padding-left: 30px;">
-                      <button type="submit" name="register" value="register">Criar conta</button>
+                      <button type="submit" id="registrar" name="register" value="register">Criar conta</button>
                     </div>
                 </div>
 
@@ -50,13 +39,13 @@
                 </div>
 
                 <div class="continue-button">
-                    <button type="submit" id="login">Entrar</button>
+                    <button id="login">Entrar</button>
                 </div>
             </form>
         </div>
     </div>
 </body>
 
-<!-- <script src="{{ url_for('static', filename='scripts/users/signin.js') }}"></> -->
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ url_for('static', filename='scripts/users/signin.js') }}"></script>
 </html>

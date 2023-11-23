@@ -11,6 +11,11 @@ def get_field_by_id(field_id):
     data = data.__dict__
     return data['data'][0]
 
+def get_field_by_name(field_name):
+    data = supabase.table("Field").select('*').eq('field', field_name).execute()
+    data = data.__dict__
+    return data['data'][0]
+
 def create_field(field):
     data = supabase.table("Field").insert({"field":field}).execute()
     data = data.__dict__
