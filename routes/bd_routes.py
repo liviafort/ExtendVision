@@ -97,14 +97,19 @@ def delete_project_route(project_id):
 
 
 #CRUD FIELDS
+
 @app_bd.route('/field/', methods=['GET'])
-def get_field_route():
+def get_field_by_id_route():
+    field_id = request.args.get('field_id')
+    field_name = request.args.get('field_name')
+
+    if field_id:
+        return get_field_by_id(field_id)
+    
+    elif field_name:
+        return get_field_by_name(field_name)
+    
     return get_fields()
-
-
-@app_bd.route('/field/<int:field_id>', methods=['GET'])
-def get_field_by_id_route(field_id):
-    return get_field_by_id(field_id)
 
 
 @app_bd.route('/field/', methods=['POST'])
