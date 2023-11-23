@@ -15,7 +15,7 @@
             <img src="{{url_for('static', filename='img/signup-pic.jpg')}}" alt="">
         </div>
         <div class="form">
-            <form action="/user/getregister" method="post">
+            <form>
                 <div class="form-header">
                     <div class="title">
                         <h1>Cadastre-se</h1>
@@ -58,7 +58,7 @@
                             <h6>Gênero</h6>
                         </div>
                         <div class="gender-group">
-                            <select id="opcao" name="gender">
+                            <select id="gender" name="gender">
                                 <option value="">Não Selecionado</option>
                                 <option value="feminino">Feminino</option>
                                 <option value="masculino">Masculino</option>
@@ -67,27 +67,17 @@
                             </select>
                         </div>
                     </div>
-                    
-                    <div class="gender-inputs">
-                        <div class="gender-title">
-                            <h6>Titutação</h6>
-                        </div>
-                        <div class="gender-group">
-                            <select id="opcao" name="title">
-                                <option value="">Não Selecionado</option>
-                                <option value="student">Estudante</option>
-                                <option value="teacher">Professor(a)</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="continue-button">
-                    <button type="submit"><a href="#">Continuar</a> </button>
+                    <button id="signup" type="submit"><a href="#">Continuar</a> </button>
                 </div>
             </form>
         </div>
     </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ url_for('static', filename='scripts/users/signup.js') }}"></script>
 
 </html>
