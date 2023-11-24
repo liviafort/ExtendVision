@@ -26,20 +26,5 @@ mail = Mail(app)
 app.config['mail'] = mail
 
 
-@app.route('/enviar_email')
-def enviar_email():
-    destinatarios = ['geovana.bezerra@academico.ifpb.edu.br']  # Lista de destinatários
-
-    msg = Message('Assunto do e-mail', recipients=destinatarios)
-    print(os.getenv('GMAIL_USER'), destinatarios, os.getenv('GMAIL_PASSWORD') )
-    msg.body = 'Este é o corpo do e-mail enviado com Flask-Mail para múltiplos destinatários'
-
-    try:
-        mail.send(msg)
-        return 'E-mail enviado com sucesso!'
-    except Exception as e:
-        return str(e)
-
-
 if __name__ == '__main__':
     app.run()
