@@ -59,7 +59,10 @@ class Register:
         response = requests.get(f"http://127.0.0.1:5000/field/?field_name={self.__data['area']}")
         data = response.json()
         self.__data['id_field'] = data['id']
-
+        
+        del self.__data['email']
+        del self.__data['area']
+        
         try:
             dados = json.dumps(self.__data)
             print("CRIANDO DADOS PARA INSERIR NO BANCO")
@@ -67,7 +70,7 @@ class Register:
 
             headers = {'Content-Type': 'application/json'}
 
-            response = requests.post("http://127.0.0.1:5000/field/", data=dados, headers=headers)
+            response = requests.post("http://127.0.0.1:5000/project/", data=dados, headers=headers)
             print("RESPONSE DO BD")
             print(response)
 

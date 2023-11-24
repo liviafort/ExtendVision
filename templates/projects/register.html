@@ -189,41 +189,26 @@
                           <input id="titulo" type="text" class="form-control" required="">
                         </div>
                         <div class="mb-3">
-                          <label>Área</label>
-                          <div class="form-check">
-                            <div class="checkbox">
-                                <input type="checkbox" class="form-check-input" id="checkbox2">
-                                <label for="checkbox2">Área 1</label>
-                            </div>
-                          </div>
-                          <div class="form-check">
-                            <div class="checkbox">
-                                <input type="checkbox" class="form-check-input" id="checkbox2">
-                                <label for="checkbox2">Área 2</label>
-                            </div>
-                          </div>
-                          <div class="form-check">
-                            <div class="checkbox">
-                                <input type="checkbox" class="form-check-input" id="checkbox2">
-                                <label for="checkbox2">Área 3</label>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="mb-3">
                           <label>Tema</label>
-                          <input type="email" class="form-control">
+                          <input id="tema" type="text" class="form-control">
+                        </div>
+												<div class="mb-3">
+                          <label>Área do projeto</label>
+                          <select id="area" class="form-control" id="area" name="area">
+														<option value="">Não Selecionado</option>
+												</select>
                         </div>
                         <div class="mb-3">
                             <label>Descrição</label>
-                            <textarea class="form-control" required=""></textarea>
+                            <textarea id="descricao" class="form-control" required=""></textarea>
                         </div>
                         <div class="mb-3">
                             <label>Carga Horária</label>
-                            <input type="text" class="form-control" required="">
+                            <input id="carga" type="number" class="form-control" required="">
                         </div>
                         <div class="mb-3">
                             <label>Vagas</label>
-                            <input type="text" class="form-control" required="">
+                            <input id="vagas" type="number" class="form-control" required="">
                         </div>
                       </div>
                       
@@ -235,35 +220,35 @@
                     <div class="card-body">
                       <div class="mb-3">
                         <div class="form-group mb-0">
-                            <label>Data Início</label>
-                            <input type="text" class="form-control" required="">
+                            <label>Data Início do Projeto</label>
+                            <input id="inicioProjeto" type="date" class="form-control" required="">
                         </div>
                       </div>
                       <div class="mb-3">
                         <div class="form-group mb-0">
-                            <label>Data Término</label>
-                            <input type="text" class="form-control" required="">
+                            <label>Data Término do Projeto</label>
+                            <input id="terminoProjeto" type="date" class="form-control" required="">
                         </div>
                       </div>
                     <div class="mb-3">
                       <div class="form-group mb-0">
-                        <label>Início da inscrição</label>
-                        <input type="text" class="form-control" required="">
+                        <label>Início das inscrições</label>
+                        <input id="inicioInscricao" type="date" class="form-control" required="">
                       </div>
                     </div>
                     <div class="mb-3">
                       <div class="form-group mb-0">
-                        <label>Término da inscrição</label>
-                        <input type="text" class="form-control" required="">
+                        <label>Término das inscricões</label>
+                        <input id="terminoInscricao" type="date" class="form-control" required="">
                       </div>
                     </div>
                       <div class="mb-3">
                         <label>Valor da Bolsa</label>
-                        <input type="email" class="form-control">
+                        <input id="valor" type="number" class="form-control">
                       </div>
                     </div>
                     <div class="card-footer text-right">
-                      <button class="btn btn-primary">Cadastrar</button>
+                      <button id="registerProjeto" class="btn btn-primary">Cadastrar</button>
                     </div>
                   </form>
                 </div>
@@ -313,6 +298,7 @@
 	<script src="../../static/assets/js/script.js"></script>
 	<script src="../../static/assets/js/custom.js"></script>
 
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="{{ url_for('static', filename='scripts/project/register.js') }}"></script>
  </body>
 </html>
