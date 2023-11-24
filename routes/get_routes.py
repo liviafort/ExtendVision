@@ -6,6 +6,7 @@ import requests
 app_get_routes = Blueprint('app_get_routes', __name__)
 #Rotas para obter respostas dos formulários
 
+
 @app_get_routes.route('/user/getlogin', methods=['POST'])
 def get_login():
     """Rota que recebe os dados do formulário de login"""
@@ -48,7 +49,7 @@ def get_register():
 
 @app_get_routes.route("/user/getproject", methods=['POST'])
 def get_register_project():
-    """Rota para receber dados do formulário de criação de usuário"""
+    """Rota para receber dados do formulário de criação de projeto"""
     data = request.json
     paramters = ['email', 'area', 'theme', 'title', 'description', 'begin_date', 'end_date', 'register_begin', 'register_end', 'workload', 'available_spots', 'scholarship']
 

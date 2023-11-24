@@ -1,11 +1,16 @@
-from flask import jsonify, redirect
+from flask import jsonify
+from entitys.EmailVisitor import EmailVisitor
 import requests
 import json
+
 
 class Register:
     def __init__(self, data):
         self.__data = data
         print("ENTROU NA CLASSE")
+
+    def get_data(self):
+        return self.__data
 
     def student_or_professor(self):
         _, domain = self.__data['email'].split("@")
@@ -76,10 +81,13 @@ class Register:
 
             if response.status_code == 200:
                 print("LINHA CRIADA")
+                visitor = EmailVisitor()
+                self.accept(visitor)
                 return response.json(), True
-
             return response.json(), False
 
         except Exception as e:
             print(e)
 
+    def accept(self, visitor):
+        visitor.visitarEmail(self)
