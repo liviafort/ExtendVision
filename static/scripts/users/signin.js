@@ -36,7 +36,7 @@ button_login.addEventListener("click", (e) =>{
         }else if(data.user_type === "student"){
           setCookie("email", email, 1);
           console.log(data)
-          //window.location = "http://127.0.0.1:5000/student/home";
+          window.location = "http://127.0.0.1:5000/student/home";
         }
       })
     }else{
