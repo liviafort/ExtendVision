@@ -1,7 +1,9 @@
 from flask import jsonify
-from entitys.EmailVisitor import EmailVisitor
+from entitys.RegisterVisitor import Registerisitor
+from entitys.facade.FacadeUsers import FacadeUser
+from entitys.facade.FacadeField import FacadeField
+from entitys.facade.FacadeProject import FacadeProject
 from datetime import datetime
-import requests
 import json
 import hashlib
 import threading
@@ -9,41 +11,67 @@ import threading
 
 class Register:
     def __init__(self, data):
-        self.__data = data
+        self.data = data
+        self.facadeUser = FacadeUser()
+        self.facadeField = FacadeField()
+        self.facadeProject = FacadeProject()
         print("ENTROU NA CLASSE")
 
+    def responseEmail(self):
+        try:
+            data = self.facadeUser.get_user_by_email(self.data['email'])
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
+
+    def responsePostUser(self):
+        try:
+            data = self.facadeUser.create_user(self.data)
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
+
+    def responseArea(self):
+        try:
+            data = self.facadeField.get_field_by_name(self.data['area'])
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
+
+    def responsePostProject(self):
+        try:
+            data = self.facadeProject.create_project(self.data)
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
 
     def get_data(self):
-        return self.__data
-
+        return self.data
 
     def student_or_professor(self):
-        local_part, domain = self.__data['email'].split("@")
-        self.__data['title'] = 'student' if domain == 'academico.ifpb.edu.br' else 'teacher'
-
+        local_part, domain = self.data['email'].split("@")
+        self.data['title'] = 'student' if domain == 'academico.ifpb.edu.br' else 'teacher'
 
     def hashing_password(self):
         try:
             hash_object = hashlib.new("SHA256")
-            data = self.__data['password'] 
+            data = self.data['password']
             hash_object.update(data.encode('utf-8'))
-            self.__data['password'] = hash_object.hexdigest()
+            self.data['password'] = hash_object.hexdigest()
         except Exception as e:
             print(e)
 
-
     def valida_email(self):
         """Verifica se é um email acadêmico do IFPB"""
-        local_part, domain = self.__data['email'].split("@")
+        local_part, domain = self.data['email'].split("@")
         print("VALIDA O EMAIL")
         print(local_part, domain)
         if domain == 'academico.ifpb.edu.br' or domain == 'ifpb.edu.br':
             return True
         return False
-    
 
     def validate_birth(self):
-        date_birth = datetime.strptime(self.__data['birth'], "%Y-%m-%d").date()
+        date_birth = datetime.strptime(self.data['birth'], "%Y-%m-%d").date()
         current_date = datetime.now().date()
 
         if date_birth < current_date:
@@ -55,7 +83,6 @@ class Register:
             return False
         return False
 
-
     def registrar(self):
         """Realiza o cadastro do usuário no banco de dados"""
 
@@ -63,8 +90,8 @@ class Register:
             return jsonify({"error": "Email acadêmico não detectado"}), False
         print("EMAIL È DO IFPB")
         
-        response = requests.get(f"http://127.0.0.1:5000/user/?user_email={self.__data['email']}")
-        if response.status_code == 200:
+        response = self.responseEmail()
+        if response['status'] == 200:
             return jsonify({"error":"Email já cadastrado"}), False
         print("EMAIL NÃO EXISTE NO BD")
 
@@ -76,63 +103,58 @@ class Register:
         print("DATA DE NASCIMENTO VÁLIDA")
 
         try:
-            dados = json.dumps(self.__data)
             print("CRIANDO DADOS PARA INSERIR NO BANCO")
-            
-            headers = {'Content-Type': 'application/json'}
-
-            response = requests.post("http://127.0.0.1:5000/user/", data=dados, headers=headers)
+            response = self.responsePostUser()
             print("RESPONSE DO BD")
             # print(response)
 
-            if response.status_code == 200:
+            if response['status'] == 200:
                  print("USUÁRIO CRIADO")
-                 return response.json(), True
+                 return response['json'], True
             
-            return response.json(), False 
+            return response['json'], False
 
         except Exception as e:
             print(e)
 
-
     def registrar_projeto(self):
         """Realiza o cadastro de um projeto no banco de dados"""
 
-        response = requests.get(f"http://127.0.0.1:5000/user/?user_email={self.__data['email']}")
-        data = response.json()
-        self.__data['id_professor'] = data['id']
+        response = self.responseEmail()
+        data = response['json']
+        self.data['id_professor'] = data['id']
 
-        response = requests.get(f"http://127.0.0.1:5000/field/?field_name={self.__data['area']}")
-        data = response.json()
-        self.__data['id_field'] = data['id']
+        response = self.responseArea()
+        data = response['json']
+        self.data['id_field'] = data['id']
         
-        del self.__data['email']
-        del self.__data['area']
+        del self.data['email']
+        del self.data['area']
         
         try:
-            dados = json.dumps(self.__data)
+            dados = json.dumps(self.data)
             print("CRIANDO DADOS PARA INSERIR NO BANCO")
             print(dados)
 
             headers = {'Content-Type': 'application/json'}
 
-            response = requests.post("http://127.0.0.1:5000/project/", data=dados, headers=headers)
+            response = self.responsePostProject()
             print("RESPONSE DO BD")
             print(response)
 
-            if response.status_code == 200:
+            if response['status'] == 200:
                 print("LINHA CRIADA")
-                visitor = EmailVisitor()
+                visitor = Registerisitor()
 
-                thread = threading.Thread(target=self.accept, args=(visitor,))
-                thread.start()
+                # thread = threading.Thread(target=self.accept, args=(visitor,))
+                # thread.start()
+                self.accept(visitor)
 
-                return response.json(), True
-            return response.json(), False
+                return response['json'], True
+            return response['json'], False
 
         except Exception as e:
             print(e)
-
 
     def accept(self, visitor):
         visitor.visitarEmail(self)
