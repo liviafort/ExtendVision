@@ -3,6 +3,7 @@ from entitys.visitor.RegisterVisitor import Registerisitor
 from entitys.facade.FacadeUsers import FacadeUser
 from entitys.facade.FacadeField import FacadeField
 from entitys.facade.FacadeProject import FacadeProject
+from entitys.facade.FacadeProjectStudents import FacadeProjectStudents
 from datetime import datetime
 import json
 import hashlib
@@ -14,6 +15,7 @@ class Register:
         self.facadeUser = FacadeUser()
         self.facadeField = FacadeField()
         self.facadeProject = FacadeProject()
+        self.facadeProjectStudent = FacadeProjectStudents()
         print("ENTROU NA CLASSE")
 
     def responseEmail(self):
@@ -40,6 +42,22 @@ class Register:
     def responsePostProject(self):
         try:
             data = self.facadeProject.create_project(self.data)
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
+
+    def responseProjectStudent(self):
+        try:
+            data = self.facadeProjectStudent.create_project_student(self.data)
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
+
+    def responseUpdateProjectStudent(self):
+        try:
+            id_project = self.data['id_project']
+            id_user = self.data['id_user']
+            data = self.facadeProjectStudent.update_project_students(id_project, id_user, self.data)
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}
@@ -131,12 +149,6 @@ class Register:
         del self.data['area']
         
         try:
-            dados = json.dumps(self.data)
-            print("CRIANDO DADOS PARA INSERIR NO BANCO")
-            print(dados)
-
-            headers = {'Content-Type': 'application/json'}
-
             response = self.responsePostProject()
             print("RESPONSE DO BD")
             print(response)
@@ -154,6 +166,30 @@ class Register:
 
         except Exception as e:
             print(e)
+
+    def registrar_projeto_estudante(self):
+        self.data['status'] = 'Espera'
+        response = self.responseProjectStudent()
+        if response['status'] == 200:
+            print("LINHA CRIADA")
+            return response['json'], True
+        return response['json'], False
+
+    def aceitar_solitacao(self):
+        self.data['status'] = 'Deferido'
+        response = self.responseUpdateProjectStudent()
+        if response['status'] == 200:
+            print("LINHA CRIADA")
+            return response['json'], True
+        return response['json'], False
+
+    def recusar_solitacao(self):
+        self.data['status'] = 'Indeferido'
+        response = self.responseUpdateProjectStudent()
+        if response['status'] == 200:
+            print("LINHA CRIADA")
+            return response['json'], True
+        return response['json'], False
 
     def accept(self, visitor):
         visitor.visitarEmail(self)

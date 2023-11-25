@@ -61,3 +61,50 @@ def get_register_project():
             return jsonify({"works": "Projeto criada com sucesso!"})
 
     return jsonify({"error": "Erro ao efetuar cadastro"}), 500
+
+
+@app_get_routes.route("/user/getInscription", methods=['POST'])
+def get_project_student():
+    """Rota para receber dados do formulário de criação de projeto"""
+    data = request.json
+    paramters = ['id_project', 'id_user']
+
+    if all([bool(data[key]) for key in paramters]):
+        register = Register(data)
+        message, its_work = register.registrar_projeto_estudante()
+
+        if its_work:
+            return jsonify({"works": "Solicitação realizada com sucesso!"})
+
+    return jsonify({"error": "Erro ao efetuar solicitação"}), 500
+
+
+@app_get_routes.route("/user/getInscriptionAprove", methods=['POST'])
+def get_inscription_aprove():
+    """Rota para receber dados do formulário de criação de projeto"""
+    data = request.json
+    paramters = ['id_project', 'id_user']
+
+    if all([bool(data[key]) for key in paramters]):
+        register = Register(data)
+        message, its_work = register.aceitar_solitacao()
+
+        if its_work:
+            return jsonify({"works": "Solicitação realizada com sucesso!"})
+
+    return jsonify({"error": "Erro ao efetuar solicitação"}), 500
+
+@app_get_routes.route("/user/getInscriptionRefused", methods=['POST'])
+def get_inscription_aprove():
+    """Rota para receber dados do formulário de criação de projeto"""
+    data = request.json
+    paramters = ['id_project', 'id_user']
+
+    if all([bool(data[key]) for key in paramters]):
+        register = Register(data)
+        message, its_work = register.recusar_solitacao()
+
+        if its_work:
+            return jsonify({"works": "Solicitação realizada com sucesso!"})
+
+    return jsonify({"error": "Erro ao efetuar solicitação"}), 500
