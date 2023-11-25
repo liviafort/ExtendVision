@@ -151,18 +151,32 @@ def get_project_students_route():
 
     user_id = request.args.get('user_id')
     project_id = request.args.get('project_id')
+    user_accepted = request.args.get('user_accepted')
 
     if user_id: 
         #exemplode url: http://127.0.0.1:5000/project_students?user_id=25
         return facadeProjectStudents.get_ps_by_user(user_id)
     
     elif project_id:
-        #exemplo de url: http://127.0.0.1:5000/project_students?project_id=25
-        return facadeProjectStudents.get_ps_by_project(project_id)
+        if user_accepted == "True":
+            projectStudents = facadeProjectStudents.get_ps_by_project(project_id)
+            studets = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Deferido"]
+            return studets
+        
+        elif user_accepted == "False":
+            projectStudents = facadeProjectStudents.get_ps_by_project(project_id)
+            studets = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] != "Deferido"]
+            return studets
     
+        else:
+            projectStudents = facadeProjectStudents.get_ps_by_project(project_id)
+            studets = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents]
+            return studets
+            
     else:
         #exemplo de url: http://127.0.0.1:5000/project_students
         return facadeProjectStudents.get_project_students()
+
 
 
 @app_bd.route('/project_students/', methods=['POST'])
