@@ -33,6 +33,17 @@ def project(id):
 
     return render_template("projects/project.html", dados=project)
 
+@app_routes.route('/student/project/<int:id>', methods=['GET'])
+def project_student(id):
+    facadeProject = FacadeProject()
+    facadeField = FacadeField()
+
+    project = facadeProject.get_project_by_id(id)
+    area = facadeField.get_field_by_id(project['id_field'])
+    project['field'] = area
+
+    return render_template("projects/project_student.html", dados=project)
+
 
 @app_routes.route('/professor/home')
 def home_professor():
@@ -79,7 +90,8 @@ def my_projects_student(id):
 
     projectStudents = facadeProjectStudents.get_ps_by_user(id)
     projects = [facadeProject.get_project_by_id(profile_student['id_project']) for projectstudent in projectStudents if projectstudent['status'] == 'Deferido']
-
+    
+    print(projects)
     return render_template("account/my_projects.html", dados=projects)
 
 

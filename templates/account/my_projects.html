@@ -16,34 +16,18 @@
                             <th scope="col">Tema</th>
                             <th scope="col">Área</th>
                             <th scope="col">Carga Horária</th>
-                            <th scope="col">Situação</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {%for meusProjeto in dados %}
                             <tr>
-                                <th scope="row">Echologic</th>
-                                <td>Meio Ambiente</td>
-                                <td>Tecnologia</td>
-                                <td><span>60h</span></td>
-                                <td><span class="text-success">Deferido</span></td>
+                                <th scope="row">{{meusProjetos.title}}</th>
+                                <td>{{meusProjetos.theme}}</td>
+                                <td>{{meusProjetos.area}}</td>
+                                <td><span>{{meusProjetos.workload}}</span></td>
                                 <td><button id="ver-projeto" class="btn btn-primary">Ver mais</button></td>
                             </tr>
-                            <tr>
-                                <th scope="row">Projeto 2</th>
-                                <td>Tema 2</td>
-                                <td>Área 2</td>
-                                <td><span>40h</span></td>
-                                <td><span class="text-warning">Ánalise</span></td>
-                                <td><button id="ver-projeto" class="btn btn-primary">Ver mais</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Projeto 3</th>
-                                <td>Tema 3</td>
-                                <td>Área 3</td>
-                                <td><span>20h</span></td>
-                                <td><span class="text-danger">Indeferido</span></td>
-                                <td><button id="ver-projeto" class="btn btn-primary">Ver mais</button></td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                         </table>
                         </div>
@@ -85,7 +69,7 @@
 	<div class="loader-overlay"></div>
 	
 	<!-- General JS Scripts -->
-	<script src="../../static/assets/js/atrana.js"></script>
+    <script src="{{ url_for('static', filename='assets/js/atrana.js') }}"></script>
 
 	<!-- JS Libraies -->
 	<script src="../../static/assets/modules/jquery/jquery.min.js"></script>
