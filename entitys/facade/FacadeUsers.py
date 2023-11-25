@@ -22,14 +22,8 @@ class FacadeUser(Facade):
         data = data.__dict__
         return data['data'][0]['id']
 
-    def update_user(self, user_id, registration, password, name, title, gender, birth, email):
-        data = self.supabase_singleton.supabase.table("User").update({'registration':registration,
-            'password':password,
-            'name':name,
-            'title':title,
-            'gender':gender,
-            'birth':birth,
-            'email':email}).eq('id', user_id).execute()
+    def update_user(self, user_id, informations):
+        data = self.supabase_singleton.supabase.table("User").update(informations).eq('id', user_id).execute()
 
         data = data.__dict__
         return data['data'][0]['id']

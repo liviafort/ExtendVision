@@ -1,4 +1,4 @@
-import { setCookie } from "../utilites/set-cookie";
+import { setCookie } from "../utilites/cookie.js";
 
 const button_login = document.getElementById("login");
 const button_criar_conta = document.getElementById("registrar");

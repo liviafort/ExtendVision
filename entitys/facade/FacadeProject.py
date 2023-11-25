@@ -18,19 +18,8 @@ class FacadeProject(Facade):
         data = data.__dict__
         return data['data'][0]['id']
 
-    def update_project(self, project_id, id_professor, id_field, title, theme, description, begin_date, end_date, register_begin, register_end, workload, available_spots, scholarship):
-        data = self.supabase_singleton.supabase.table("Project").update({'id_professor':id_professor,
-            'id_field':id_field,
-            'title':title,
-            'theme':theme,
-            'description':description,
-            'begin_date':begin_date,
-            'end_date':end_date,
-            'register_begin':register_begin,
-            'register_end':register_end,
-            'workload':workload,
-            'available_spots':available_spots,
-            'scholarship':scholarship}).eq('id', project_id).execute()
+    def update_project(self, project_id, informations):
+        data = self.supabase_singleton.supabase.table("Project").update(informations).eq('id', project_id).execute()
 
         data = data.__dict__
         return data['data'][0]['id']

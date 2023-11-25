@@ -17,13 +17,13 @@ class FacadeField(Facade):
         data = data.__dict__
         return data['data'][0]
 
-    def create_field(self, field):
-        data = self.supabase_singleton.supabase.table("Field").insert({"field":field}).execute()
+    def create_field(self, informations):
+        data = self.supabase_singleton.supabase.table("Field").insert(informations).execute()
         data = data.__dict__
         return data['data'][0]['id']
 
-    def update_field(self, id, field):
-        data = self.supabase_singleton.supabase.table("Field").update({"field": field}).eq('id', id).execute()
+    def update_field(self, id, informations):
+        data = self.supabase_singleton.supabase.table("Field").update(informations).eq('id', id).execute()
         data = data.__dict__
         return data['data'][0]['id']
 

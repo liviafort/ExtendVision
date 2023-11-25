@@ -1,4 +1,4 @@
-from Facade import Facade
+from entitys.facade.Facade import Facade
 
 
 class FacadeProjectStudents(Facade):
@@ -17,13 +17,13 @@ class FacadeProjectStudents(Facade):
         data = data.__dict__
         return data['data']
 
-    def create_project_student(self, id_project, id_user):
-        data = self.supabase_singleton.supabase.table("ProjectStudents").insert({'id_project': id_project, 'id_user': id_user}).execute()
+    def create_project_student(self, informations):
+        data = self.supabase_singleton.supabase.table("ProjectStudents").insert(informations).execute()
         data = data.__dict__
         return (data['data'][0]['id_project'], data['data'][0]['id_user'])
 
-    def update_project_students(self, old_id_project, old_id_user, id_project, id_user):
-        data = self.supabase_singleton.supabase.table("ProjectStudents").update({'id_project': id_project,'id_user': id_user}).match({'id_project': old_id_project,'id_user':old_id_user}).execute()
+    def update_project_students(self, old_id_project, old_id_user, informations):
+        data = self.supabase_singleton.supabase.table("ProjectStudents").update(informations).match({'id_project': old_id_project,'id_user':old_id_user}).execute()
         data = data.__dict__
         return (data['data'][0]['id_project'], data['data'][0]['id_user'])
 
