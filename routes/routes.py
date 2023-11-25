@@ -33,9 +33,14 @@ def home_professor():
     projects = facadeProject.get_projects()
     return render_template("home/home_professor.html", dados=projects)
 
+
 @app_routes.route('/student/home')
 def home_student():
     return render_template("home/home_student.html")
+
+@app_routes.route('/student/account/profile')
+def profile():
+    return render_template("account/profile.html")
 
 @app_routes.route('/student/profile')
 def profile_student():
