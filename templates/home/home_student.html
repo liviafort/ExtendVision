@@ -1,24 +1,5 @@
 
-<!doctype html>
-<html lang="en">
-  <head>
-
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<title>ExtendVision</title>
-
-	<!-- Bootstrap CSS-->
-	<link rel="stylesheet" href="{{ url_for('static', filename='assets/modules/bootstrap-5.1.3/css/bootstrap.css') }}">
-	<!-- Style CSS (White)--> 
-	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
-	<!-- FontAwesome CSS-->
-	<link rel="stylesheet" href="{{ url_for('static', filename='assets/modules/fontawesome6.1.1/css/all.css') }}">
-	<!-- Boxicons CSS-->
-	<link rel="stylesheet" href="{{ url_for('static', filename='assets/modules/boxicons/css/boxicons.min.css') }}">
-
-</head>
+{% include 'navbar/navbar_student.html' %}
 <body>
   
   <!--Topbar -->
@@ -117,24 +98,7 @@
 			<div class="row">
 				
 				<!-- Card Start -->
-				{% for projeto in dados.projetos %}
-				<div class="col-xl-4 col-md-6 col-sm-12">
-					<div class="card">
-						<div class="card-content">
-							<div class="card-body">
-								<h4 class="card-title">{{ projeto.nome }}</h4>
-								<p class="card-text">
-									{{ projeto.description }}
-								</p>
-							</div>
-						</div>
-						<div class="card-footer d-flex justify-content-between">
-							<span>Card Footer</span>
-							<button id="project" class="btn btn-light-primary">Saiba mais</button>
-						</div>
-					</div>
-				</div>
-				{% endfor %}
+				
 				<!-- End Card Start -->
 		
             </div><!-- End Container-->
@@ -178,19 +142,6 @@
     <!-- Template JS File -->
 	<script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
 	<script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
-
-	<script>
-		// Use a função fetch para carregar o conteúdo da barra de navegação
-		fetch('{{url_for("static", filename="navbar/navbar_student.html")}}')
-			.then(response => response.text())
-			.then(data => {
-				// Coloque o conteúdo na div
-				document.getElementById('navbar-container').innerHTML = data;
-			})
-			.catch(error => {
-				console.error('Erro ao carregar a barra de navegação:', error);
-			});
-	</script>
 	
  </body>
 </html>
