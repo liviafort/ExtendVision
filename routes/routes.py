@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request, redirect
+from entitys.facade.FacadeProject import FacadeProject
 
 app_routes = Blueprint('app_routes', __name__)
 
@@ -19,15 +20,18 @@ def register_project():
     return render_template("projects/register.html")
 
 
-@app_routes.route('/projects/project')
-def project():
-    return render_template("projects/project.html")
+@app_routes.route('/projects/project/<int:id>', methods=['GET'])
+def project(id):
+    facadeProject = FacadeProject()
+    project = facadeProject.get_project_by_id(id)
+    return render_template("projects/project.html", dados=project)
 
 
 @app_routes.route('/professor/home')
 def home_professor():
-    return render_template("home/home_professor.html")
-
+    facadeProject = FacadeProject()
+    projects = facadeProject.get_projects()
+    return render_template("home/home_professor.html", dados=projects)
 
 @app_routes.route('/student/home')
 def home_student():
@@ -45,6 +49,10 @@ def profile_professor():
 def update_projects():
     return render_template("projects/update.html")
 
-@app_routes.route('/account/myProjects')
+@app_routes.route('/professor/account/myProjects')
 def my_projects():
     return render_template("projects/my_projects.html")
+
+@app_routes.route('/student/account/myProjects')
+def my_projects_student():
+    return render_template("account/my_projects.html")
