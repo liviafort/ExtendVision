@@ -19,11 +19,19 @@ document.addEventListener("DOMContentLoaded", async (e) => {
           })
       })
     }})
+
+    const selectElement1 = document.querySelector(`#area`);
+    for (let j = 0; j < selectElement1.options.length; j++) {
+      if (selectElement1.options[j].value === area) {
+        selectElement1.selectedIndex = j;
+        break;
+      }
+    }
 })
 
 //--------------CRIAÇÃO DE PROJETO ----------------//
 
-const button_register_projeto = document.getElementById("registerProjeto");
+const button_register_projeto = document.getElementById("updateProjeto");
 
 button_register_projeto.addEventListener("click", (e) =>{
   e.preventDefault();
@@ -57,7 +65,7 @@ button_register_projeto.addEventListener("click", (e) =>{
     "scholarship": parseInt(valor)
   }
 
-  fetch("http://127.0.0.1:5000/user/getproject", {
+  fetch("http://127.0.0.1:5000/user/updateproject", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

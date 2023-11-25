@@ -14,29 +14,28 @@
                       <div class="card-body">
                         <div class="mb-3">
                           <label>Título</label>
-                          <input id="titulo" type="text" class="form-control" required="">
+                          <input value="{{dados.title}}" id="titulo" type="text" class="form-control" required="">
                         </div>
                         <div class="mb-3">
                           <label>Tema</label>
-                          <input id="tema" type="text" class="form-control">
+                          <input value="{{dados.theme}}" id="tema" type="text" class="form-control">
                         </div>
 												<div class="mb-3">
                           <label>Área do projeto</label>
                           <select id="area" class="form-control" id="area" name="area">
-														<option value="">Não Selecionado</option>
 												</select>
                         </div>
                         <div class="mb-3">
                             <label>Descrição</label>
-                            <textarea id="descricao" class="form-control" required=""></textarea>
+                            <textarea id="descricao" class="form-control" required="">{{dados.title}}</textarea>
                         </div>
                         <div class="mb-3">
                             <label>Carga Horária</label>
-                            <input id="carga" type="number" class="form-control" required="">
+                            <input value="{{dados.workload}}" id="carga" type="number" class="form-control" required="">
                         </div>
                         <div class="mb-3">
                             <label>Vagas</label>
-                            <input id="vagas" type="number" class="form-control" required="">
+                            <input value="{{dados.available_spots}}" id="vagas" type="number" class="form-control" required="">
                         </div>
                       </div>
                       
@@ -49,34 +48,34 @@
                       <div class="mb-3">
                         <div class="form-group mb-0">
                             <label>Data Início do Projeto</label>
-                            <input id="inicioProjeto" type="date" class="form-control" required="">
+                            <input value="{{dados.begin_date}}" id="inicioProjeto" type="date" class="form-control" required="">
                         </div>
                       </div>
                       <div class="mb-3">
                         <div class="form-group mb-0">
                             <label>Data Término do Projeto</label>
-                            <input id="terminoProjeto" type="date" class="form-control" required="">
+                            <input value="{{dados.end_date}}" id="terminoProjeto" type="date" class="form-control" required="">
                         </div>
                       </div>
                     <div class="mb-3">
                       <div class="form-group mb-0">
                         <label>Início das inscrições</label>
-                        <input id="inicioInscricao" type="date" class="form-control" required="">
+                        <input value="{{dados.register_begin}}" id="inicioInscricao" type="date" class="form-control" required="">
                       </div>
                     </div>
                     <div class="mb-3">
                       <div class="form-group mb-0">
                         <label>Término das inscricões</label>
-                        <input id="terminoInscricao" type="date" class="form-control" required="">
+                        <input id="terminoInscricao" value="{{dados.register_end}}" type="date" class="form-control" required="">
                       </div>
                     </div>
                       <div class="mb-3">
                         <label>Valor da Bolsa</label>
-                        <input id="valor" type="number" class="form-control">
+                        <input value="{{dados.scholarship}}" id="valor" type="number" class="form-control">
                       </div>
                     </div>
                     <div class="card-footer text-right">
-                      <button id="registerProjeto" class="btn btn-primary">Atualizar</button>
+                      <button id="updateProjeto" class="btn btn-primary">Atualizar</button>
                     </div>
                   </form>
                 </div>
@@ -117,6 +116,10 @@
 	<!-- General JS Scripts -->
 	<script src="../../static/assets/js/atrana.js"></script>
 
+  <script>
+    var area = {{dados.area}}
+  </script>
+
 	<!-- JS Libraies -->
 	<script src="../../static/assets/modules/jquery/jquery.min.js"></script>
 	<script src="../../static/assets/modules/bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
@@ -127,6 +130,6 @@
 	<script src="../../static/assets/js/custom.js"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script type="module" src="{{ url_for('static', filename='scripts/project/register.js') }}"></script>
+	<script type="module" src="{{ url_for('static', filename='scripts/project/update.js') }}"></script>
  </body>
 </html>
