@@ -20,5 +20,5 @@ document.addEventListener("DOMContentLoaded", async (e) => {
   profile.href = `http://127.0.0.1:5000/professor/profile`
   perfil.href = `http://127.0.0.1:5000/professor/profile`;
   meus_projetos.href = `http://127.0.0.1:5000/professor/account/myProjects/${user}`;
-  minhas_inscricoes.href = `http://127.0.0.1:5000/projects/register/${user}`;
+  minhas_inscricoes.href = `http://127.0.0.1:5000/projects/register`;
 })

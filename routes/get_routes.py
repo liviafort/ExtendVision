@@ -20,10 +20,11 @@ def get_login():
 
         if its_valid:
             message, type_user = login.tipo_usuario()
+            user_id = login.user_id()
             if type_user == "student":
-                return jsonify({"user_type": "student"})
+                return jsonify({"user_type": "student", "user_id": user_id})
             elif type_user == "teacher":
-                return jsonify({"user_type": "teacher"})
+                return jsonify({"user_type": "teacher", "user_id": user_id})
             else:
                 return jsonify({"error": "Erro ao entrar no sistema"}), 500
             

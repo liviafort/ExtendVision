@@ -44,3 +44,9 @@ class Login:
             return jsonify({"message": "Email valido"}), data["title"]
 
         return jsonify({"error": "Email invalida"}), "error"
+    
+    def user_id(self):
+        response = self.responseEmail()
+        if response['status'] == 200:
+            return response['json']['id']
+        return -1

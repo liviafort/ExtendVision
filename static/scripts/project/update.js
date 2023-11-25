@@ -1,5 +1,4 @@
-import { getCookie } from "../utilites/cookie.js";
-
+import { getCookie, getUser } from "../utilites/cookie.js";
 //---------ADICIONANDO OPTION AO SELECT ------------//
 document.addEventListener("DOMContentLoaded", async (e) => {
   e.preventDefault()
@@ -51,7 +50,7 @@ button_register_projeto.addEventListener("click", (e) =>{
   const valor = document.getElementById("valor").value;
 
   const jsonRegister = {
-    "email": email,
+    "id_professor": getUser(),
     "title": titulo,
     "theme": tema,
     "area": area,
@@ -65,8 +64,10 @@ button_register_projeto.addEventListener("click", (e) =>{
     "scholarship": parseInt(valor)
   }
 
-  fetch("http://127.0.0.1:5000/project/", {
-    method: 'POST',
+  const id = urlDaPagina.match(/\/(\d+)(?:#|$)/)[1];
+
+  fetch(`http://127.0.0.1:5000/project/${id}`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -74,17 +75,13 @@ button_register_projeto.addEventListener("click", (e) =>{
   })
   .then(response => {
     if (response.ok) {
-      response.json().then((data) => {
         Swal.fire({
           position: "center",
           icon: "success",
           title: data.works,
           showConfirmButton: false,
           timer: 1500
-        }).then(() => {
-          window.location = "http://127.0.0.1:5000/professor/home"
         })
-      })
     }else{
       response.json().then((data) => {
         Swal.fire({
