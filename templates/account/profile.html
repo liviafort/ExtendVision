@@ -1,0 +1,308 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Profile - Atrana</title>
+
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/modules/bootstrap-5.1.3/css/bootstrap.css') }}">
+	<!-- Style CSS (White)--> 
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+	<!-- FontAwesome CSS-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/modules/fontawesome6.1.1/css/all.css') }}">
+	<!-- Boxicons CSS-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/modules/boxicons/css/boxicons.min.css') }}">
+  
+</head>
+<body>
+  
+  <!--Topbar -->
+  <div class="topbar transition">
+    <div class="bars">
+      <button type="button" class="btn transition" id="sidebar-toggle">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+      <div class="menu">
+        <ul>
+          <li class="nav-item dropdown dropdown-list-toggle">
+            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <i class="fa fa-bell size-icon-1"></i><span class="badge bg-danger notif">4</span>
+            </a> 				 
+            <div class="dropdown-menu dropdown-list">
+              <div class="dropdown-header">Notifications</div>
+              <div class="dropdown-list-content dropdown-list-icons">
+                <div class="custome-list-notif"> 
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <div class="dropdown-item-icon bg-primary text-white">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    The Atrana template has the latest update!
+                    <div class="time text-primary">3 Min Ago</div>
+                  </div>
+                  </a>
+  
+                  <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-info text-white">
+                    <i class="far fa-user"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                     Sri asks you for friendship!
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                  </a>
+  
+                  <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-danger text-white">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Storage has been cleared, now you can get back to work!
+                    <div class="time">20 Hours Ago</div>
+                  </div>
+                  </a>
+  
+                
+                  <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-info text-white">
+                    <i class="fas fa-bell"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                      Welcome to Atrana Template, I hope you enjoy using this template!
+                    <div class="time">Yesterday</div>
+                  </div>
+                  </a>
+   
+                </div>
+              </div>
+  
+              <div class="dropdown-footer text-center">
+                <a href="#">View All</a>
+              </div>
+  
+              
+            </li>
+         
+            <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{{url_for('static', filename='img/usuario.png')}}" alt="">
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="my-profile.html"><i class="fa fa-user size-icon-1"></i> <span>My Profile</span></a>
+              <a class="dropdown-item" href="settings.html"><i class="fa fa-cog size-icon-1"></i> <span>Settings</span></a>
+              <hr class="dropdown-divider">
+              <a class="dropdown-item" href="http://127.0.0.1:5000/"><i class="fa fa-sign-out-alt  size-icon-1"></i> <span>Logout</span></a>
+            </ul>
+            </li>
+        </ul>
+      </div>
+    </div>
+  
+	<!--Sidebar-->
+	<div class="sidebar transition overlay-scrollbars animate__animated  animate__slideInLeft">
+    <div class="sidebar-content"> 
+      <div id="sidebar">
+  
+  <!-- Logo -->
+  <div class="logo">
+      <h2 class="mb-0"> ExtendVision</h2>
+  </div>
+
+        <ul class="side-menu">
+            <li>
+      <a class="" href="http://127.0.0.1:5000/student/home">
+        <i class='bx bxs-dashboard icon' ></i> PROJETOS
+      </a>
+    </li>
+
+    <!-- Divider-->
+            <li class="divider" data-text="STARTER">ESTUDANTE</li>
+
+            <li>
+                <a href="#">
+        <i class='fa fa-th icon' ></i> 
+        Conta 
+        <i class='bx bx-chevron-right icon-right' ></i>
+      </a>
+                <ul class="side-dropdown">
+        <li><a href="http://127.0.0.1:5000/student/account/profile">Perfil</a></li>
+        <li><a href="bootstrap-badge.html">Meus projetos</a></li>
+        <li><a href="bootstrap-breadcrumb.html">Minhas inscrições</a></li>
+                </ul>
+            </li>
+
+    <li class="divider" data-text="Atrana">Sobre</li>
+
+    <li>
+      <a href="blank-pages.html">
+        <i class='bx bxs-meh-blank icon'></i> 
+        Desenvolvedores
+      </a>
+    </li>
+    <li>
+      <a href="blank-pages.html">
+        <i class='bx bxs-meh-blank icon'></i> 
+        O projeto
+      </a>
+    </li>
+
+        </ul>
+
+        <div class="ads">
+    <div class="wrapper">
+      <div class="help-icon"><i class="fa fa-circle-question fa-3x"></i></div>
+      <p>Precisa de ajuda com <strong>ExtendVision</strong>?</p>
+                <a href="docs/" class="btn-upgrade">Documentation</a>
+             </div>
+        </div>
+    </div>
+
+   </div> 
+</div>
+</div><!-- End Sidebar-->
+
+
+<div class="sidebar-overlay"></div>
+
+
+	<!--Content Start-->
+	<div class="content-start transition">
+		<div class="container-fluid dashboard">
+			<div class="content-header">
+				<h4>Hi, Pessoa!</h4>
+				<p>Altere suas Informações aqui
+        </p>
+			</div>
+		  
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start align-items-sm-center  ">
+                            <img src="data:image/jpeg;base64,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" alt="user-avatar" class="d-block rounded" height="100" width="100px" 
+                            id="uploadedAvatar" />
+                            <div class="mt-2">
+                              <label for="upload" class="btn btn-primary me-2" tabindex="0">
+                                <span class="d-none d-sm-block">Carregar nova foto</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
+                              </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body"> 
+                        <form  method="POST" accept="my-profile.html">
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="firstName" class="form-label">Primeiro Nome</label>
+                                    <input class="form-control" type="text" id="firstName" name="firstName" value="Andree" autofocus />
+                                </div>
+
+                                <div class="mb-3 col-md-6">
+                                    <label for="lastName" class="form-label">Sobrenome</label>
+                                    <input class="form-control" type="text" name="lastName" id="lastName" value="Doe" />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input class="form-control" type="text" id="email" name="email" value="Andree@example.com" placeholder="Andree@example.com" />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                  <div class="btn-group dropdown me-1 mb-1">
+                                    <button type="button" class="btn btn-primary btn-lg">
+                                          Gênero
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Feminino</a>
+                                        <a class="dropdown-item" href="#">Masculino</a>
+                                        <a class="dropdown-item" href="#">Outro</a>
+                                        <a class="dropdown-item" href="#">Prefiro não dizer</a>
+                                    </div>
+                                </div>
+                              </div>
+                              
+                                <div class="mt-2">
+                                    <button type="submit" class="btn btn-primary me-2">Salvar mudanças</button>
+                                    <button type="reset" class="btn btn-outline-secondary">Cancelar</button>
+                                </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="card">
+                        <h5 class="card-header">Delete Account</h5>
+                        <div class="card-body">
+                          <div class="mb-3 col-12 mb-0">
+                            <div class="alert alert-warning">
+                              <h6 class="alert-heading fw-bold mb-1">Tem certeza que deseja deletar sua conta?</h6>
+                              <p class="mb-0">Uma vez a conta deletada, não tem como retornar. Por favor tenha certeza.</p>
+                            </div>
+                          </div>
+                          <form  method="POST" accept="my-profile.html"> 
+                            <div class="form-check mb-3">
+                              <input class="form-check-input" type="checkbox" name="accountActivation" id="accountActivation" />
+                              <label class="form-check-label" for="accountActivation">Eu confirmo a destivação</label>
+                            </div>
+                            <button type="submit" class="btn btn-danger deactivate-account">Desativar Conta</button>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+		</div> <!-- End Container -->
+	</div><!-- End Content -->
+
+
+	<!-- Footer -->				
+	<footer>
+		<div class="footer">
+			<div class="float-start">
+				<p>2023 &copy; ExtendVision</p>
+			</div>
+				<div class="float-end">
+					<p>Crafted by 
+						<span class="text-danger">
+							<a href="https://github.com/liviafort/ExtendVision" class="author-footer">Equipe ExtendVision</a>
+						</span> 
+					</p>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Preloader -->
+	<div class="loader">
+		<div class="spinner-border text-light" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+	
+	<!-- Loader -->
+	<div class="loader-overlay"></div>
+
+	<!-- General JS Scripts -->
+	<script src="{{ url_for('static', filename='assets/js/atrana.js') }}"></script>
+
+	<!-- JS Libraies -->
+	<script src="{{ url_for('static', filename='assets/modules/jquery/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/modules/bootstrap-5.1.3/js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/modules/popper/popper.min.js') }}"></script>
+
+    <!-- Template JS File -->
+	<script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+ </body>
+</html>

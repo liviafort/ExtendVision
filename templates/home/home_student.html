@@ -104,74 +104,8 @@
 		</div>
 	</div>
 
-
-	<!--Sidebar-->
-	<div class="sidebar transition overlay-scrollbars animate__animated  animate__slideInLeft">
-        <div class="sidebar-content"> 
-        	<div id="sidebar">
-			
-			<!-- Logo -->
-			<div class="logo">
-					<h2 class="mb-0"> ExtendVision</h2>
-			</div>
-
-            <ul class="side-menu">
-                <li>
-					<a class="" href="http://127.0.0.1:5000/student/home">
-						<i class='bx bxs-dashboard icon' ></i> PROJETOS
-					</a>
-				</li>
-
-				<!-- Divider-->
-                <li class="divider" data-text="STARTER">ESTUDANTE</li>
-
-                <li>
-                    <a href="#">
-						<i class='fa fa-th icon' ></i> 
-						Conta 
-						<i class='bx bx-chevron-right icon-right' ></i>
-					</a>
-                    <ul class="side-dropdown">
-						<li><a href="bootstrap-alert.html">Perfil</a></li>
-						<li><a href="bootstrap-badge.html">Meus projetos</a></li>
-						<li><a href="bootstrap-breadcrumb.html">Minhas inscrições</a></li>
-                    </ul>
-                </li>
-
-				<li class="divider" data-text="Atrana">Sobre</li>
-
-				<li>
-					<a href="blank-pages.html">
-						<i class='bx bxs-meh-blank icon'></i> 
-						Desenvolvedores
-					</a>
-				</li>
-				<li>
-					<a href="blank-pages.html">
-						<i class='bx bxs-meh-blank icon'></i> 
-						O projeto
-					</a>
-				</li>
-
-            </ul>
-
-            <div class="ads">
-				<div class="wrapper">
-					<div class="help-icon"><i class="fa fa-circle-question fa-3x"></i></div>
-					<p>Precisa de ajuda com <strong>ExtendVision</strong>?</p>
-                    <a href="docs/" class="btn-upgrade">Documentation</a>
-                 </div>
-            </div>
-        </div>
-
-       </div> 
-	 </div>
-	</div><!-- End Sidebar-->
-
-
-	<div class="sidebar-overlay"></div>
-
-
+	<div id="navbar-container"></div>
+	
 	<!--Content Start-->
 	<div class="content-start transition  "> 
 		<div class="container-fluid dashboard">
@@ -244,5 +178,19 @@
     <!-- Template JS File -->
 	<script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
 	<script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+
+	<script>
+		// Use a função fetch para carregar o conteúdo da barra de navegação
+		fetch('{{url_for("static", filename="navbar/navbar_student.html")}}')
+			.then(response => response.text())
+			.then(data => {
+				// Coloque o conteúdo na div
+				document.getElementById('navbar-container').innerHTML = data;
+			})
+			.catch(error => {
+				console.error('Erro ao carregar a barra de navegação:', error);
+			});
+	</script>
+	
  </body>
 </html>

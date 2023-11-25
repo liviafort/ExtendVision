@@ -33,3 +33,6 @@ def home_professor():
 def home_student():
     return render_template("home/home_student.html")
 
+@app_routes.route('/student/account/profile')
+def profile():
+    return render_template("account/profile.html")
