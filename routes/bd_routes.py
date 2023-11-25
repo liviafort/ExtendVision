@@ -57,7 +57,6 @@ def delete_users(user_id):
 
 
 #CRUD PROJET
-
 @app_bd.route('/project/', methods=['GET'])
 def get_project():
     return get_projects()
@@ -97,7 +96,6 @@ def delete_project_route(project_id):
 
 
 #CRUD FIELDS
-
 @app_bd.route('/field/', methods=['GET'])
 def get_field_by_id_route():
     field_id = request.args.get('field_id')

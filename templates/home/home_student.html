@@ -117,58 +117,24 @@
 			<div class="row">
 				
 				<!-- Card Start -->
+				{% for projeto in dados.projetos %}
 				<div class="col-xl-4 col-md-6 col-sm-12">
 					<div class="card">
 						<div class="card-content">
 							<div class="card-body">
-								<h4 class="card-title">EchoLogic</h4>
+								<h4 class="card-title">{{ projeto.nome }}</h4>
 								<p class="card-text">
-									O projeto de extensão tem como objetivo principal disseminarinformações relevantes sobre
-									os materiais empregados na fabricação de equipamentos de informática, destacando a poluição
-									gerada pela exploração desses recursos naturais e o impacto decorrente do descarte inadequado
-									desses materiais. Por meio de um site informativo, buscamos conscientizar a comunidade sobre
-									a importância de adotar boas práticas de consumo e explorar alternativas menos poluentes.
+									{{ projeto.description }}
 								</p>
 							</div>
 						</div>
 						<div class="card-footer d-flex justify-content-between">
 							<span>Card Footer</span>
-							<button class="btn btn-light-primary">Saiba mais</button>
+							<button id="project" class="btn btn-light-primary">Saiba mais</button>
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-4 col-md-6 col-sm-12">
-					<div class="card">
-						<div class="card-content">
-							<div class="card-body">
-								<h4 class="card-title">Projeto de Robótica</h4>
-								<p class="card-text">
-									Esse projeto é uma iniciativa inovadora que visa explorar e aplicar os princípios da robótica em diversas áreas, desde a automação industrial até a educação e pesquisa científica. Este projeto envolve o design, construção e programação de robôs autônomos ou controlados remotamente para realizar tarefas específicas. A equipe multidisciplinar de engenheiros, programadores e entusiastas da robótica trabalhará em conjunto para desenvolver soluções criativas e funcionais.
-								</p>
-							</div>
-						</div>
-						<div class="card-footer d-flex justify-content-between">
-							<span>Card Footer</span>
-							<button class="btn btn-light-primary">Saiba mais</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-md-6 col-sm-12">
-					<div class="card">
-						<div class="card-content">
-							<div class="card-body">
-								<h4 class="card-title">Projeto VR</h4>
-								<p class="card-text">
-									Exploração e aplicação da tecnologia de realidade virtual em diversas áreas, incluindo entretenimento, educação, treinamento, simulação e assistência médica. Nesse projeto, uma equipe interdisciplinar de desenvolvedores, designers e especialistas em VR trabalhará para criar experiências imersivas e envolventes por meio de dispositivos de realidade virtual, como óculos VR e aplicativos específicos.
-								</p>
-							</div>
-						</div>
-						<div class="card-footer d-flex justify-content-between">
-							<span>Card Footer</span>
-							<button class="btn btn-light-primary">Saber mais</button>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
 				<!-- End Card Start -->
 		
             </div><!-- End Container-->

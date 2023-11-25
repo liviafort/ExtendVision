@@ -1,18 +1,20 @@
-from database.supabd import supabase
+from entitys.SupabaseSingleton import SupabaseSingleton
 from flask import jsonify
 
+supabase_singleton = SupabaseSingleton()
+
 def get_project_by_id(project_id):
-    data = supabase.table("Project").select("*").eq("id",project_id).execute()
+    data = supabase_singleton.supabase.table("Project").select("*").eq("id",project_id).execute()
     data = data.__dict__
     return data['data'][0]
 
 def get_projects():
-    data = supabase.table("Project").select("*").execute()
+    data = supabase_singleton.supabase.table("Project").select("*").execute()
     data = data.__dict__
     return data['data']
 
 def create_project(id_professor, id_field, title, theme, description, begin_date, end_date, register_begin, register_end, workload, available_spots, scholarship):
-    data = supabase.table("Project").insert({'id_professor':id_professor,
+    data = supabase_singleton.supabase.table("Project").insert({'id_professor':id_professor,
         'id_field':id_field,
         'title':title,
         'theme':theme,
@@ -29,7 +31,7 @@ def create_project(id_professor, id_field, title, theme, description, begin_date
     return data['data'][0]['id']
     
 def update_project(project_id, id_professor, id_field, title, theme, description, begin_date, end_date, register_begin, register_end, workload, available_spots, scholarship):
-    data = supabase.table("Project").update({'id_professor':id_professor,
+    data = supabase_singleton.supabase.table("Project").update({'id_professor':id_professor,
         'id_field':id_field,
         'title':title,
         'theme':theme,
@@ -46,7 +48,7 @@ def update_project(project_id, id_professor, id_field, title, theme, description
     return data['data'][0]['id']
 
 def delete_project(project_id):
-    data = supabase.table("Project").delete().eq("id", project_id).execute()
+    data = supabase_singleton.supabase.table("Project").delete().eq("id", project_id).execute()
     data = data.__dict__
     return data['data'][0]
 
