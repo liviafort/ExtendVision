@@ -7,7 +7,9 @@
                 <div class="card-content">
 									<div class="card-footer text-right">
 														<h1 class="card-title">{{dados.title}}</h1>
+														{% if dados.id_professor == dados.user %}
                             <a id="editar-projeto" href="http://127.0.0.1:5000/projects/update/{{dados.id}}" class="btn btn-primary">EDITAR PROJETO</a>
+														{% endif %}
                     </div>
                 </div>
 				<!--Start List Group-->
@@ -137,6 +139,7 @@
 					</div>
 				</div>
                 <!--End Start List Group-->
+					{% if dados.id_professor == dados.user %}
                 <div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
@@ -181,6 +184,8 @@
 						</div>
 					</div>
 				</div>
+
+				{% endif %}
 		
                
             </div><!-- End Container-->

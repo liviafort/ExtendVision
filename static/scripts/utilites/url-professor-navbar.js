@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", async (e) => {
   e.preventDefault()
-  let id;
+  let user;
   const cookies = document.cookie.split(";");
   for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim();
-      if (cookie.startsWith("id=")) {
-          id = cookie.substring("id=".length);
+      if (cookie.startsWith("user=")) {
+          user = cookie.substring("user=".length);
           break;
       }
   }
   
-  id = 1;
+  user = 1;
   
   const perfil = document.getElementById("perfil")
   const profile = document.getElementById("profile")
@@ -19,6 +19,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
   
   profile.href = `http://127.0.0.1:5000/professor/profile`
   perfil.href = `http://127.0.0.1:5000/professor/profile`;
-  meus_projetos.href = `http://127.0.0.1:5000/professor/account/myProjects/${id}`;
-  minhas_inscricoes.href = `http://127.0.0.1:5000/projects/register/${id}`;
+  meus_projetos.href = `http://127.0.0.1:5000/professor/account/myProjects/${user}`;
+  minhas_inscricoes.href = `http://127.0.0.1:5000/projects/register/${user}`;
 })

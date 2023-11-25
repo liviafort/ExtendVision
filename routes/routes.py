@@ -30,7 +30,9 @@ def project(id):
     project = facadeProject.get_project_by_id(id)
     area = facadeField.get_field_by_id(project['id_field'])
     project['field'] = area
-
+    
+    project['user'] = int(request.cookies.get('user'))
+    
     return render_template("projects/project.html", dados=project)
 
 @app_routes.route('/student/project/<int:id>', methods=['GET'])

@@ -31,10 +31,12 @@ button_login.addEventListener("click", (e) =>{
       response.json().then((data) => {
         if(data.user_type === "teacher"){
           setCookie("email", email, 1);
+          setCookie("user", 40, 1);
           window.location = "http://127.0.0.1:5000/professor/home";
 
         }else if(data.user_type === "student"){
           setCookie("email", email, 1);
+          setCookie("user", 40, 1);
           console.log(data)
           window.location = "http://127.0.0.1:5000/student/home";
         }
