@@ -7,6 +7,14 @@ class FacadeProject(Facade):
         data = data.__dict__
         return data['data'][0]
 
+    def get_project_by_id_professor(self, id_professor):
+        try:
+            data = self.supabase_singleton.supabase.table("Project").select("*").eq("id_professor", id_professor).execute()
+            data = data.__dict__
+            return data['data']
+        except:
+            return []
+
     def get_projects(self):
         data = self.supabase_singleton.supabase.table("Project").select("*").execute()
         data = data.__dict__

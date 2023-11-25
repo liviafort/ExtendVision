@@ -8,9 +8,12 @@ class FacadeProjectStudents(Facade):
         return data['data']
 
     def get_ps_by_user(self, id):
-        data = self.supabase_singleton.supabase.table("ProjectStudents").select('*').eq('id_user', id).execute()
-        data = data.__dict__
-        return data['data']
+        try:
+            data = self.supabase_singleton.supabase.table("ProjectStudents").select('*').eq('id_user', id).execute()
+            data = data.__dict__
+            return data['data']
+        except:
+            return []
 
     def get_ps_by_project(self, id):
         data = self.supabase_singleton.supabase.table("ProjectStudents").select("*").eq('id_project', id).execute()
