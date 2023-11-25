@@ -4,7 +4,6 @@ app_routes = Blueprint('app_routes', __name__)
 
 #Rotas para as páginas principais da aplicação
 
-
 @app_routes.route('/')
 def login():
     return render_template("users/signin.html")

@@ -1,3 +1,5 @@
+import { setCookie } from "../utilites/set-cookie";
+
 const button_login = document.getElementById("login");
 const button_criar_conta = document.getElementById("registrar");
 
@@ -56,10 +58,3 @@ button_login.addEventListener("click", (e) =>{
     });
   });
 });
-
-function setCookie(nome, valor, diasParaExpirar) {
-  var dataExpiracao = new Date();
-  dataExpiracao.setTime(dataExpiracao.getTime() + (diasParaExpirar * 24 * 60 * 60 * 1000));
-  var expires = "expires=" + dataExpiracao.toUTCString();
-  document.cookie = nome + "=" + valor + ";" + expires + ";path=/";
-}

@@ -64,8 +64,6 @@ button_register_projeto.addEventListener("click", (e) =>{
     "scholarship": parseInt(valor)
   }
 
-  console.log(jsonRegister)
-
   fetch("http://127.0.0.1:5000/user/getproject", {
     method: 'POST',
     headers: {
