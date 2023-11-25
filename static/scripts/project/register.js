@@ -1,3 +1,5 @@
+import { getCookie } from "../utilites/cookie";
+
 //---------ADICIONANDO OPTION AO SELECT ------------//
 document.addEventListener("DOMContentLoaded", async (e) => {
   e.preventDefault()
@@ -26,16 +28,7 @@ const button_register_projeto = document.getElementById("registerProjeto");
 button_register_projeto.addEventListener("click", (e) =>{
   e.preventDefault();
 
-  let email;
-  const cookies = document.cookie.split(";");
-  for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.startsWith("email=")) {
-          email = cookie.substring("email=".length);
-          break;
-      }
-  }
-
+  const email = getCookie();
   const titulo = document.getElementById("titulo").value;
   const tema = document.getElementById("tema").value;
   const selectArea = document.querySelector('#area');
