@@ -2,7 +2,7 @@ from flask import Flask
 from routes.routes import app_routes
 from routes.bd_routes import app_bd
 from routes.get_routes import app_get_routes
-from flask_mail import Message, Mail
+from flask_mail import Mail
 import os
 
 app = Flask(__name__)
