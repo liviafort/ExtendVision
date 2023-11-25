@@ -65,7 +65,7 @@ button_register_projeto.addEventListener("click", (e) =>{
     "scholarship": parseInt(valor)
   }
 
-  fetch("http://127.0.0.1:5000/user/updateproject", {
+  fetch("http://127.0.0.1:5000/project/", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
