@@ -182,12 +182,12 @@
 			<div class="row">
 				
 				<!-- Card Start -->
-				{% for projeto in dados.projetos %}
+				{% for projeto in dados %}
 				<div class="col-xl-4 col-md-6 col-sm-12">
 					<div class="card">
 						<div class="card-content">
 							<div class="card-body">
-								<h4 class="card-title">{{ projeto.nome }}</h4>
+								<h4 class="card-title">{{ projeto.title }}</h4>
 								<p class="card-text">
 									{{ projeto.description }}
 								</p>
@@ -195,7 +195,7 @@
 						</div>
 						<div class="card-footer d-flex justify-content-between">
 							<span>Card Footer</span>
-							<button id="project" class="btn btn-light-primary">Saiba mais</button>
+							<a id="project" href="http://127.0.0.1:5000/projects/project/{{projeto.id}}" class="btn btn-light-primary">Saiba mais</a>
 						</div>
 					</div>
 				</div>

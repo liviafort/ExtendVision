@@ -20,16 +20,17 @@ def register_project():
     return render_template("projects/register.html")
 
 
-@app_routes.route('/projects/project')
-def project():
-    return render_template("projects/project.html")
+@app_routes.route('/projects/project/<int:id>', methods=['GET'])
+def project(id):
+    facadeProject = FacadeProject()
+    project = facadeProject.get_project_by_id(id)
+    return render_template("projects/project.html", dados=project)
 
 
 @app_routes.route('/professor/home')
 def home_professor():
     facadeProject = FacadeProject()
     projects = facadeProject.get_projects()
-    print(projects)
     return render_template("home/home_professor.html", dados=projects)
 
 
