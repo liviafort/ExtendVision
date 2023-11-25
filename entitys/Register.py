@@ -1,12 +1,11 @@
 from flask import jsonify
-from entitys.RegisterVisitor import Registerisitor
+from entitys.visitor.RegisterVisitor import Registerisitor
 from entitys.facade.FacadeUsers import FacadeUser
 from entitys.facade.FacadeField import FacadeField
 from entitys.facade.FacadeProject import FacadeProject
 from datetime import datetime
 import json
 import hashlib
-import threading
 
 
 class Register:

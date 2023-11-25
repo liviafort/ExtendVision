@@ -1,4 +1,4 @@
-from entitys.Visitor import Visitor
+from entitys.visitor.Visitor import Visitor
 from flask_mail import Message
 from flask import current_app
 
