@@ -38,10 +38,10 @@ def project(id):
     project['user'] = int(request.cookies.get('user'))
 
     projectStudents = facadeProjectStudents.get_ps_by_project(id)
-    students = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
+    wait = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
+    accepted = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Deferido"]
 
-    datas = {'project': project, 'users': students}
-    print(datas)
+    datas = {'projects': project, 'users_wait': wait, 'users_accepted': accepted}
 
     return render_template("projects/project.html", dados=datas)
 
