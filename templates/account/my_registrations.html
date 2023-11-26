@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Meus Projetos</h4>
+                        <h4>Meus Registros</h4>
                     </div>
                     <div class="card-body"> 
                     <div class="table-responsive"> 
@@ -16,16 +16,18 @@
                             <th scope="col">Tema</th>
                             <th scope="col">Área</th>
                             <th scope="col">Carga Horária</th>
+                            <th scope="col">Situação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {%for meusProjetos in dados %}
+                            {%for meusRegistros in dados %}
                             <tr>
-                                <th scope="row">{{meusProjetos.title}}</th>
-                                <td>{{meusProjetos.theme}}</td>
-                                <td>{{meusProjetos.field}}</td>
-                                <td><span>{{meusProjetos.workload}}</span></td>
-                                <td><a href="http://127.0.0.1:5000/student/project/{{meusProjetos.id}}" id="ver-projeto" class="btn btn-primary">Ver mais</a></td>
+                                <th scope="row">{{meusRegistros.title}}</th>
+                                <td>{{meusRegistros.theme}}</td>
+                                <td>{{meusRegistros.field}}</td>
+                                <td><span>{{meusRegistros.workload}}</span></td>
+                                <td><span>{{meusRegistros.status}}</span></td>
+                                <td><a href="http://127.0.0.1:5000/student/project/{{meusRegistros.id}}" id="ver-projeto" class="btn btn-primary">Ver mais</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

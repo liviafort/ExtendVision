@@ -10,8 +10,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
       }
   }
   
-  user = 1;
-  
   const perfil = document.getElementById("perfil")
   const profile = document.getElementById("profile")
   const meus_projetos = document.getElementById("meus_projetos")
