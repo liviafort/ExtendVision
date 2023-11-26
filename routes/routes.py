@@ -32,7 +32,7 @@ def project(id):
     facadeUser = FacadeUser()
 
     project = facadeProject.get_project_by_id(id)
-    area = facadeField.get_field_by_id(project['id_field'])
+    area = facadeField.get_field_by_id(project['id_field'])['field']
     project['field'] = area
 
     project['user'] = int(request.cookies.get('user'))
@@ -52,7 +52,7 @@ def project_student(id):
     facadeUser = FacadeUser()
 
     project = facadeProject.get_project_by_id(id)
-    area = facadeField.get_field_by_id(project['id_field'])
+    area = facadeField.get_field_by_id(project['id_field'])['field']
     project['field'] = area
 
     return render_template("projects/project_student.html", dados=project)
