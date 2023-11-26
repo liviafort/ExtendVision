@@ -165,7 +165,7 @@
 									<td>{{alunos.name}}</td>
 									<td>{{alunos.email}}</td>
 									<td><button id="aceitar{{alunos.id}}" class="btn btn-primary">Aceitar</button></td>
-									<td><button id="rejeitar{{alunos.id}}" class="btn btn-primary">Rejeitar</button></td>
+									<td><button id="rejeitar{{alunos.id}}" class="btn btn-danger">Rejeitar</button></td>
                 </tr>
 								{% endfor %}
 							</tbody>
@@ -188,7 +188,23 @@
 							<thead>
 							  <tr>
 								<th scope="col">Matricula</th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
 								<th scope="col">Nome</th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
 								<th scope="col">Email</th>
 							  </tr>
 							</thead>
@@ -196,8 +212,25 @@
 
 								{% for alunos in dados.users_accepted %}
 							  <tr>
+								<!--Espaços vazios apenas para centralizar, já que não pode mudar o CSS-->
 									<th scope="row">{{alunos.registration}}</th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
 									<td>{{alunos.name}}</td>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row"></th>
 									<td>{{alunos.email}}</td>
                 </tr>
 								{% endfor %}
