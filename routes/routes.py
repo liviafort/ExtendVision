@@ -88,11 +88,17 @@ def my_projects(id):
 @app_routes.route('/student/account/myProjects/<int:id>', methods=['GET'])
 def my_projects_student(id):
     facadeProject = FacadeProject()
+    facadeField = FacadeField()
     facadeProjectStudents = FacadeProjectStudents()
 
     projectStudents = facadeProjectStudents.get_ps_by_user(id)
-    projects = [facadeProject.get_project_by_id(projectstudent['id_project']) for projectstudent in projectStudents if projectstudent['status'] == 'Deferido']
-    
+
+    projects = list()
+    for projectstudent in projectStudents:
+        if projectstudent['status'] == 'Deferido':
+            project = facadeProject.get_project_by_id(projectstudent['id_project'])
+            project['field'] = facadeField.get_field_by_id(project['id_field'])['field']
+            projects.append(project)
     print(projects)
     return render_template("account/my_projects.html", dados=projects)
 
@@ -100,9 +106,16 @@ def my_projects_student(id):
 @app_routes.route('/student/account/myRegistrations/<int:id>', methods=['GET'])
 def my_registrations_student(id):
     facadeProject = FacadeProject()
+    facadeField = FacadeField()
     facadeProjectStudents = FacadeProjectStudents()
 
     projectStudents = facadeProjectStudents.get_ps_by_user(id)
-    projects = [facadeProject.get_project_by_id(projectstudent['id_project']) for projectstudent in projectStudents if projectstudent['status'] != 'Deferido']
+    projects = list()
+    for projectstudent in projectStudents:
+        if projectstudent['status'] != 'Deferido':
+            project = facadeProject.get_project_by_id(projectstudent['id_project'])
+            project['field'] = facadeField.get_field_by_id(project['id_field'])['field']
+            projects.append(project)
+    print(projects)
 
     return render_template("account/my_registrations.html", dados=projects)
