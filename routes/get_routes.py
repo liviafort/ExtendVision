@@ -29,7 +29,6 @@ def get_login():
                 return jsonify({"error": "Erro ao entrar no sistema"}), 500
             
     return jsonify({"error": "Erro ao entrar no sistema"}), 500
-    # flash('Email ou Senha faltando') ##TESTE
 
 
 @app_get_routes.route("/user/getregister", methods=['POST'])
