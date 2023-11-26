@@ -4,32 +4,36 @@
 	<div class="content-start transition">
 		<div class="container-fluid dashboard">
 			<div class="content-header">
-				<h4>Hi, Pessoa!</h4>
+				<h4>Hi, {{dados.name}}!</h4>
 				<p>Altere suas Informações aqui
         </p>
 			</div>
                     <div class="card-body"> 
                         <form  method="POST" accept="my-profile.html">
                             <div class="row">
-                                <div class="mb-3 col-md-6">
-                                    <label for="firstName" class="form-label">Primeiro Nome</label>
-                                    <input class="form-control" type="text" id="firstName" name="firstName" value="Andree" autofocus />
-                                </div>
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="lastName" class="form-label">Sobrenome</label>
-                                    <input class="form-control" type="text" name="lastName" id="lastName" value="Doe" />
+                                    <label for="lastName" class="form-label">Nome</label>
+                                    <input class="form-control" type="text" name="lastName" id="name" value="{{dados.name}}" />
                                 </div>
+                                <div class="mb-3 col-md-6">
+                                  <label for="matricula" class="form-label">Matrícula</label>
+                                  <input class="form-control" type="text" id="matricula" name="matricula" value="{{dados.registration}}" readonly/>
+                              </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="email" class="form-label">E-mail</label>
-                                    <input class="form-control" type="text" id="email" name="email" value="Andree@example.com" placeholder="Andree@example.com" />
+                                    <input class="form-control" type="text" id="email" name="email" value="{{dados.email}}" readonly/>
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                  <label>Gênero</label>
-                                  <select id="area" value="" class="form-control" id="area" name="area">
-                                    <option value="Feminino">Feminino</option>
-                                    <option value="Masculino">Masculino</option>
-                                    <option value="Prefiro nao dizer">Prefiro não dizer</option>
+                                  <label for="birth" class="form-label">Data de Nascimento</label>
+                                  <input class="form-control" type="date" id="birth" name="birth" value="{{dados.birth}}"/>
+                              </div>
+                                <div class="mb-3 col-md-6">
+                                  <label for="gender" class="form-label">Gênero</label>
+                                  <select id="gender" class="form-control" name="gender">
+                                    <option value="feminino">Feminino</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="prefiro nao dizer">Prefiro não dizer</option>
                                     <option value="Outro">Outro</option>
                                 </select>
                                 </div>
@@ -92,6 +96,11 @@
 			<span class="sr-only">Loading...</span>
 		</div>
 	</div>
+
+  <script>
+    var genero = "{{dados.gender}}"
+    console.log(genero)
+  </script>
 	
 	<!-- Loader -->
 	<div class="loader-overlay"></div>
@@ -108,5 +117,6 @@
   <!-- Template JS File -->
 	<script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
 	<script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='scripts/account/profile.js') }}"></script>
  </body>
 </html>
