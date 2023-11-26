@@ -165,7 +165,7 @@ def get_project_students_route():
         
         elif user_accepted == "False":
             projectStudents = facadeProjectStudents.get_ps_by_project(project_id)
-            studets = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] != "Deferido"]
+            studets = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
             return studets
     
         else:
