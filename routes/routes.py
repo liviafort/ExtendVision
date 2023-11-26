@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request, redirect
+from entitys.facade.FacadeUsers import FacadeUser
 from entitys.facade.FacadeProject import FacadeProject
 from entitys.facade.FacadeProjectStudents import FacadeProjectStudents
 from entitys.facade.FacadeField import FacadeField
@@ -25,27 +26,29 @@ def register_project():
 
 @app_routes.route('/projects/project/<int:id>', methods=['GET'])
 def project(id):
+    facadeProjectStudents = FacadeProjectStudents()
     facadeProject = FacadeProject()
     facadeField = FacadeField()
-    facadeUser = FacadeUser
+    facadeUser = FacadeUser()
 
     project = facadeProject.get_project_by_id(id)
     area = facadeField.get_field_by_id(project['id_field'])
     project['field'] = area
-    
+
     project['user'] = int(request.cookies.get('user'))
-    
+
     projectStudents = facadeProjectStudents.get_ps_by_project(id)
-    studets = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
-    
-    project['alunos'] = studets
-    
-    return render_template("projects/project.html", dados=project)
+    students = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
+
+    datas = {'projects': project, 'users': students}
+
+    return render_template("projects/project.html", dados=datas)
 
 @app_routes.route('/student/project/<int:id>', methods=['GET'])
 def project_student(id):
     facadeProject = FacadeProject()
     facadeField = FacadeField()
+    facadeUser = FacadeUser()
 
     project = facadeProject.get_project_by_id(id)
     area = facadeField.get_field_by_id(project['id_field'])
