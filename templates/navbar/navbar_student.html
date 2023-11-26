@@ -1,12 +1,12 @@
-<!-- navbar.html -->
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ExtendVision</title>
+	<title>ExtendVision</title>
 
 	<!-- Bootstrap CSS-->
 	<link rel="stylesheet" href="{{ url_for('static', filename='assets/modules/bootstrap-5.1.3/css/bootstrap.css') }}">
@@ -16,89 +16,60 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='assets/modules/fontawesome6.1.1/css/all.css') }}">
 	<!-- Boxicons CSS-->
 	<link rel="stylesheet" href="{{ url_for('static', filename='assets/modules/boxicons/css/boxicons.min.css') }}">
+
 </head>
 <body>
+  
+  <!--Topbar -->
+  <div class="topbar transition">
+	<div class="bars">
+		<button type="button" class="btn transition" id="sidebar-toggle">
+			<i class="fa fa-bars"></i>
+		</button>
+	</div>
+		<div class="menu">
+			<ul>
+				<li class="nav-item dropdown dropdown-list-toggle">
+					<a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					   <i class="fa fa-bell size-icon-1"></i><span class="badge bg-danger notif">1</span>
+					</a> 				 
+					<div class="dropdown-menu dropdown-list">
+						<div class="dropdown-header">Notificações</div>
+						<div class="dropdown-list-content dropdown-list-icons">
+							<div class="custome-list-notif"> 
+							  <a href="#" class="dropdown-item">
+								<div class="dropdown-item-icon bg-info text-white">
+								  <i class="fas fa-bell"></i>
+								</div>
+								<div class="dropdown-item-desc">
+								   Veja agora, novo projeto  de extensão adicionado!
+								  <div class="time">Hoje</div>
+								</div>
+							  </a>
+ 
+							</div>
+						</div>
 
-<div class="topbar transition">
-    <div class="bars">
-        <button type="button" class="btn transition" id="sidebar-toggle">
-            <i class="fa fa-bars"></i>
-        </button>
-    </div>
-        <div class="menu">
-            <ul>
-                <li class="nav-item dropdown dropdown-list-toggle">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-bell size-icon-1"></i><span class="badge bg-danger notif">4</span>
-                    </a> 				 
-                    <div class="dropdown-menu dropdown-list">
-                        <div class="dropdown-header">Notifications</div>
-                        <div class="dropdown-list-content dropdown-list-icons">
-                            <div class="custome-list-notif"> 
-                            <a href="#" class="dropdown-item dropdown-item-unread">
-                                <div class="dropdown-item-icon bg-primary text-white">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <div class="dropdown-item-desc">
-                                    The Atrana template has the latest update!
-                                    <div class="time text-primary">3 Min Ago</div>
-                                </div>
-                                </a>
+						<div class="dropdown-footer text-center">
+						  <a href="#">Ver tudo</a>
+						</div>
 
-                                <a href="#" class="dropdown-item">
-                                <div class="dropdown-item-icon bg-info text-white">
-                                    <i class="far fa-user"></i>
-                                </div>
-                                <div class="dropdown-item-desc">
-                                    Sri asks you for friendship!
-                                    <div class="time">12 Hours Ago</div>
-                                </div>
-                                </a>
-
-                                <a href="#" class="dropdown-item">
-                                <div class="dropdown-item-icon bg-danger text-white">
-                                    <i class="fas fa-check"></i>
-                                </div>
-                                <div class="dropdown-item-desc">
-                                    Storage has been cleared, now you can get back to work!
-                                    <div class="time">20 Hours Ago</div>
-                                </div>
-                                </a>
-
-                            
-                                <a href="#" class="dropdown-item">
-                                <div class="dropdown-item-icon bg-info text-white">
-                                    <i class="fas fa-bell"></i>
-                                </div>
-                                <div class="dropdown-item-desc">
-                                    Welcome to Atrana Template, I hope you enjoy using this template!
-                                    <div class="time">Yesterday</div>
-                                </div>
-                                </a>
-    
-                            </div>
-                        </div>
-
-                        <div class="dropdown-footer text-center">
-                            <a href="#">View All</a>
-                        </div>
-
-                        
-                    </li>
-                
-                    <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{url_for('static', filename='img/usuario.png')}}" alt="">
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" id="profile" href=""><i class="fa fa-user size-icon-1"></i> <span>Perfil</span></a>
-                        <hr class="dropdown-divider">
-                        <a class="dropdown-item" href="http://127.0.0.1:5000/"><i class="fa fa-sign-out-alt  size-icon-1"></i> <span>Sair</span></a>
-                    </ul>
-                    </li>
-            </ul>
-        </div>
-    </div>
+					  
+				  </li>
+			 
+				  <li class="nav-item dropdown">
+					<a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					  <img src="{{url_for('static', filename='img/usuario.png')}}" alt="">
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" id="profile" href=""><i class="fa fa-user size-icon-1"></i> <span>Perfil</span></a>
+						<hr class="dropdown-divider">
+						<a class="dropdown-item" href="http://127.0.0.1:5000/"><i class="fa fa-sign-out-alt  size-icon-1"></i> <span>Sair</span></a>
+					</ul>
+				  </li>
+			</ul>
+		</div>
+	</div>
 <!--Sidebar-->
 <div id="navbar-container">
 <div class="sidebar transition overlay-scrollbars animate__animated  animate__slideInLeft">
@@ -107,7 +78,7 @@
         
         <!-- Logo -->
         <div class="logo">
-                <h2 class="mb-0"> ExtendVision</h2>
+            <h2 class="mb-0"><img src="{{url_for('static', filename='img/cap.png')}}"> ExtendVision</h2>
         </div>
 
         <ul class="side-menu">
