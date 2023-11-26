@@ -1,7 +1,7 @@
-from entitys.facade.Facade import Facade
+from entitys.BdClass.Bd import Bd
 
 
-class FacadeProjectStudents(Facade):
+class BdProjectStudents(Bd):
     def get_project_students(self):
         data = self.supabase_singleton.supabase.table("ProjectStudents").select("*").execute()
         data = data.__dict__
