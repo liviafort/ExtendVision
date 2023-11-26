@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, jsonify, request, redirect
-from entitys.facade.FacadeUsers import FacadeUser
-from entitys.facade.FacadeProject import FacadeProject
-from entitys.facade.FacadeProjectStudents import FacadeProjectStudents
-from entitys.facade.FacadeField import FacadeField
+from entitys.bdClasses.BdUsers import BdUser
+from entitys.bdClasses.BdProject import BdProject
+from entitys.bdClasses.BdProjectStudents import BdProjectStudents
+from entitys.bdClasses.BdField import BdField
 
 
 app_routes = Blueprint('app_routes', __name__)
@@ -27,20 +27,20 @@ def register_project():
 
 @app_routes.route('/projects/project/<int:id>', methods=['GET'])
 def project(id):
-    facadeProjectStudents = FacadeProjectStudents()
-    facadeProject = FacadeProject()
-    facadeField = FacadeField()
-    facadeUser = FacadeUser()
+    bdProjectStudents = BdProjectStudents()
+    bdProject = BdProject()
+    bdField = BdField()
+    bdUser = BdUser()
 
-    project = facadeProject.get_project_by_id(id)
-    area = facadeField.get_field_by_id(project['id_field'])['field']
+    project = bdProject.get_project_by_id(id)
+    area = bdField.get_field_by_id(project['id_field'])['field']
     project['field'] = area
 
     project['user'] = int(request.cookies.get('user'))
 
-    projectStudents = facadeProjectStudents.get_ps_by_project(id)
-    wait = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
-    accepted = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Deferido"]
+    projectStudents = bdProjectStudents.get_ps_by_project(id)
+    wait = [bdUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
+    accepted = [bdUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Deferido"]
 
     datas = {'project': project, 'users_wait': wait, 'users_accepted': accepted}
 
@@ -49,12 +49,11 @@ def project(id):
 
 @app_routes.route('/student/project/<int:id>', methods=['GET'])
 def project_student(id):
-    facadeProject = FacadeProject()
-    facadeField = FacadeField()
-    facadeUser = FacadeUser()
+    bdProject = BdProject()
+    bdField = BdField()
 
-    project = facadeProject.get_project_by_id(id)
-    area = facadeField.get_field_by_id(project['id_field'])['field']
+    project = bdProject.get_project_by_id(id)
+    area = bdField.get_field_by_id(project['id_field'])['field']
     project['field'] = area
 
     return render_template("projects/project_student.html", dados=project)
@@ -62,64 +61,64 @@ def project_student(id):
 
 @app_routes.route('/professor/home')
 def home_professor():
-    facadeProject = FacadeProject()
-    projects = facadeProject.get_projects()
+    bdProject = BdProject()
+    projects = bdProject.get_projects()
     return render_template("home/home_professor.html", dados=projects)
 
 
 @app_routes.route('/student/home')
 def home_student():
-    facadeProject = FacadeProject()
-    projects = facadeProject.get_projects()
+    bdProject = BdProject()
+    projects = bdProject.get_projects()
     return render_template("home/home_student.html", dados=projects)
 
 
 @app_routes.route('/student/profile/<int:id>', methods=['GET'])
 def profile_student(id):
-    facadeUser = FacadeUser()
-    user = facadeUser.get_user_by_id(id)
+    bdUser = BdUser()
+    user = bdUser.get_user_by_id(id)
     return render_template("account/profile_student.html", dados=user)
 
 
 @app_routes.route('/professor/profile/<int:id>', methods=['GET'])
 def profile_professor(id):
-    facadeUser = FacadeUser()
-    user = facadeUser.get_user_by_id(id)
+    bdUser = BdUser()
+    user = bdUser.get_user_by_id(id)
     return render_template("account/profile_professor.html", dados=user)
 
 
 @app_routes.route('/projects/update/<int:id>', methods=['GET'])
 def update_projects(id):
-    facadeProject = FacadeProject()
-    project = facadeProject.get_project_by_id(id)
+    bdProject = BdProject()
+    project = bdProject.get_project_by_id(id)
     return render_template("projects/update.html", dados=project)
 
 
 @app_routes.route('/professor/account/myProjects/<int:id>', methods=['GET'])
 def my_projects(id):
-    facadeProject = FacadeProject()
-    facadeField = FacadeField()
-    projects = facadeProject.get_project_by_id_professor(id)
+    bdProject = BdProject()
+    bdField = BdField()
+    projects = bdProject.get_project_by_id_professor(id)
     projects_field = list()
     for i, project in enumerate(projects):
-        project['field'] = facadeField.get_field_by_id(project['id_field'])['field']
+        project['field'] = bdField.get_field_by_id(project['id_field'])['field']
         projects_field.append(project)
     return render_template("account/projects_professor.html", dados=projects_field)
 
 
 @app_routes.route('/student/account/myProjects/<int:id>', methods=['GET'])
 def my_projects_student(id):
-    facadeProject = FacadeProject()
-    facadeField = FacadeField()
-    facadeProjectStudents = FacadeProjectStudents()
+    bdProject = BdProject()
+    bdField = BdField()
+    bdProjectStudents = BdProjectStudents()
 
-    projectStudents = facadeProjectStudents.get_ps_by_user(id)
+    projectStudents = bdProjectStudents.get_ps_by_user(id)
 
     projects = list()
     for projectstudent in projectStudents:
         if projectstudent['status'] == 'Deferido':
-            project = facadeProject.get_project_by_id(projectstudent['id_project'])
-            project['field'] = facadeField.get_field_by_id(project['id_field'])['field']
+            project = bdProject.get_project_by_id(projectstudent['id_project'])
+            project['field'] = bdField.get_field_by_id(project['id_field'])['field']
             projects.append(project)
     print(projects)
     
@@ -128,16 +127,16 @@ def my_projects_student(id):
 
 @app_routes.route('/student/account/myRegistrations/<int:id>', methods=['GET'])
 def my_registrations_student(id):
-    facadeProject = FacadeProject()
-    facadeField = FacadeField()
-    facadeProjectStudents = FacadeProjectStudents()
+    bdProject = BdProject()
+    bdField = BdField()
+    bdProjectStudents = BdProjectStudents()
 
-    projectStudents = facadeProjectStudents.get_ps_by_user(id)
+    projectStudents = bdProjectStudents.get_ps_by_user(id)
     projects = list()
     for projectstudent in projectStudents:
         if projectstudent['status'] != 'Deferido':
-            project = facadeProject.get_project_by_id(projectstudent['id_project'])
-            project['field'] = facadeField.get_field_by_id(project['id_field'])['field']
+            project = bdProject.get_project_by_id(projectstudent['id_project'])
+            project['field'] = bdField.get_field_by_id(project['id_field'])['field']
             project['status'] = projectstudent['status']
             projects.append(project)
     print(projects)

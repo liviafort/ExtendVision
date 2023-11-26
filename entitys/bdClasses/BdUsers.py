@@ -1,7 +1,7 @@
-from entitys.facade.Facade import Facade
+from entitys.bdClasses.Bd import Bd
 
 
-class FacadeUser(Facade):
+class BdUser(Bd):
     def get_user_by_id(self, user_id):
         data = self.supabase_singleton.supabase.table("User").select("*").eq("id", user_id).execute()
         data = data.__dict__
