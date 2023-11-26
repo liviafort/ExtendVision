@@ -1,17 +1,17 @@
 from flask import jsonify, redirect
-from entitys.facade.FacadeUsers import FacadeUser
+from entitys.bdClasses.BdUsers import BdUser
 import hashlib
 
 
 class Login:
     def __init__(self, data):
         self.data = data
-        self.facadeUser = FacadeUser()
+        self.bdUser = BdUser()
         self.response = self.responseEmail()
 
     def responseEmail(self):
         try:
-            data = self.facadeUser.get_user_by_email(self.data['email'])
+            data = self.bdUser.get_user_by_email(self.data['email'])
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}
