@@ -178,7 +178,6 @@ def get_project_students_route():
         return facadeProjectStudents.get_project_students()
 
 
-
 @app_bd.route('/project_students/', methods=['POST'])
 def create_project_students_route():
     data = request.json
