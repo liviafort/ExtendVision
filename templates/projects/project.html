@@ -6,9 +6,9 @@
             <div class="container-fluid dashboard">
                 <div class="card-content">
 									<div class="card-footer text-right">
-														<h1 class="card-title">{{dados.title}}</h1>
-														{% if dados.id_professor == dados.user %}
-                            <a id="editar-projeto" href="http://127.0.0.1:5000/projects/update/{{dados.id}}" class="btn btn-primary">EDITAR PROJETO</a>
+														<h1 class="card-title">{{dados.project.title}}</h1>
+														{% if dados.project.id_professor == dados.project.user %}
+                            <a id="editar-projeto" href="http://127.0.0.1:5000/projects/update/{{dados.project.id}}" class="btn btn-primary">EDITAR PROJETO</a>
 														{% endif %}
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                                                 <h5 class="mb-1">Carga Horária</h5>
                                             </div>
                                             <p class="mb-1">
-                                                {{dados.workload}}
+                                                {{dados.project.workload}}
                                             </p>
                                         </a>
                                         <a href="#" class="list-group-item list-group-item-action">
@@ -49,7 +49,7 @@
                                                 <h5 class="mb-1">Vagas</h5>
                                             </div>
                                             <p class="mb-1">
-                                                {{dados.available_spots}}
+                                                {{dados.project.available_spots}}
                                             </p>
                                         </a>
                                         <a href="#" class="list-group-item list-group-item-action">
@@ -57,7 +57,7 @@
                                                 <h5 class="mb-1">Valor da Bolsa</h5>
                                             </div>
                                             <p class="mb-1">
-                                                {{dados.scholarship}}
+                                                {{dados.project.scholarship}}
                                             </p>
                                         </a>
                                     </div>
@@ -79,7 +79,7 @@
                                                 <h5 class="mb-1">Área</h5>
                                             </div>
                                             <p class="mb-1">
-                                                {{dados.field.field}}
+                                                {{dados.project.field.field}}
                                             </p>
                                         </a>
                                         <a href="#" class="list-group-item list-group-item-action">
@@ -87,7 +87,7 @@
                                                 <h5 class="mb-2">Tema</h5>
                                             </div>
                                             <p class="mb-1">
-                                                {{dados.theme}}
+                                                {{dados.project.theme}}
                                             </p>
                                         </a>
                                     </div>
@@ -106,7 +106,7 @@
                                                 <h5 class="mb-2">Início das Incrições</h5>
                                             </div>
                                             <p class="mb-1">
-                                                {{dados.register_begin}}
+                                                {{dados.project.register_begin}}
                                             </p>
                                         </a>
                                         <a href="#" class="list-group-item list-group-item-action">
@@ -114,7 +114,7 @@
                                                 <h5 class="mb-2">Término das Incrições</h5>
                                             </div>
                                             <p class="mb-1">
-                                                {{dados.register_end}}
+                                                {{dados.project.register_end}}
                                             </p>
                                         </a>
                                         <a href="#" class="list-group-item list-group-item-action">
@@ -122,7 +122,7 @@
                                                 <h5 class="mb-1">Início do Projeto</h5>
                                             </div>
                                             <p class="mb-1">
-                                                {{dados.begin_date}}
+                                                {{dados.project.begin_date}}
                                             </p>
                                         </a>
                                         <a href="#" class="list-group-item list-group-item-action">
@@ -130,7 +130,7 @@
                                                 <h5 class="mb-2">Término do Projeto</h5>
                                             </div>
                                             <p class="mb-1">
-                                                {{dados.end_date}}
+                                                {{dados.project.end_date}}
                                             </p>
                                         </a>
                                     </div>
@@ -139,7 +139,7 @@
 					</div>
 				</div>
                 <!--End Start List Group-->
-					{% if dados.id_professor == dados.user %}
+					{% if dados.project.id_professor == dados.project.user %}
                 <div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
@@ -153,20 +153,19 @@
 								<th scope="col">Matricula</th>
 								<th scope="col">Nome</th>
 								<th scope="col">Email</th>
-								<th scope="col">Situação</th>
 								<th scope="col">Aceitar</th>
 								<th scope="col">Rejeitar</th>
 							  </tr>
 							</thead>
 							<tbody>
 
-								{% for alunos in dados.alunos %}
+								{% for alunos in dados.users %}
 							  <tr>
-									<th scope="row">20202020</th>
-									<td>Aluno 1</td>
-									<td>umemail@academico.ifpb.edu.br</td>
-									<td><span class="text-success">Bolsista</span></td>
-									<td><button class="btn btn-primary">Ver mais</button></td>
+									<th scope="row">{{alunos.registration}}</th>
+									<td>{{alunos.name}}</td>
+									<td>{{alunos.email}}</td>
+									<td><button id="aceitar{{alunos.id}}" class="btn btn-primary">Aceitar</button></td>
+									<td><button id="rejeitar{{alunos.id}}" class="btn btn-primary">Rejeitar</button></td>
                 </tr>
 								{% endfor %}
 							</tbody>
@@ -222,6 +221,7 @@
 	<script src="../../static/assets/js/custom.js"></script>
 
 	<script src="../../static/assets/js/script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="module" src="{{ url_for('static', filename='scripts/project/project.js') }}"></script>
 
  </body>

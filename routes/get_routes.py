@@ -108,6 +108,6 @@ def get_inscription_refused():
         message, its_work = register.recusar_solitacao()
 
         if its_work:
-            return jsonify({"works": "Solicitação realizada com sucesso!"})
+            return jsonify({"works": "Solicitação rejeitada com sucesso!"})
 
     return jsonify({"error": "Erro ao efetuar solicitação"}), 500
