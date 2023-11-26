@@ -96,6 +96,7 @@ def get_inscription_aprove():
 
     return jsonify({"error": "Erro ao efetuar solicitação"}), 500
 
+
 @app_get_routes.route("/user/getInscriptionRefused", methods=['POST'])
 def get_inscription_refused():
     """Rota para receber dados do formulário de criação de projeto"""
