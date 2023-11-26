@@ -72,12 +72,12 @@ def home_student():
     return render_template("home/home_student.html", dados=projects)
 
 
-@app_routes.route('/student/profile')
+@app_routes.route('/student/profile/<int:id>', methods=['GET'])
 def profile_student():
     return render_template("account/profile_student.html")
 
 
-@app_routes.route('/professor/profile')
+@app_routes.route('/professor/profile/<int:id>', methods=['GET'])
 def profile_professor():
     return render_template("account/profile_professor.html")
 
