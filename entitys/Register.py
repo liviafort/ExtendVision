@@ -169,6 +169,7 @@ class Register:
 
     def registrar_projeto_estudante(self):
         self.data['status'] = 'Espera'
+        print(self.data)
         response = self.responseProjectStudent()
         if response['status'] == 200:
             print("LINHA CRIADA")

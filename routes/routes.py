@@ -91,6 +91,7 @@ def my_projects_student(id):
     facadeProjectStudents = FacadeProjectStudents()
 
     projectStudents = facadeProjectStudents.get_ps_by_user(id)
+    print(projectStudents)
     projects = [facadeProject.get_project_by_id(profile_student['id_project']) for projectstudent in projectStudents if projectstudent['status'] == 'Deferido']
     
     print(projects)

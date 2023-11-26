@@ -64,6 +64,7 @@ button_register_projeto.addEventListener("click", (e) =>{
     "scholarship": parseInt(valor)
   }
 
+  const urlDaPagina = window.location.href;
   const id = urlDaPagina.match(/\/(\d+)(?:#|$)/)[1];
 
   fetch(`http://127.0.0.1:5000/project/${id}`, {

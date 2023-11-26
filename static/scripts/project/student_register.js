@@ -1,13 +1,23 @@
+import { getUser } from "../utilites/cookie.js";
+
 const button_inscrever = document.getElementById("inscrever");
 
 button_inscrever.addEventListener("click", (e) =>{
   e.preventDefault();
-  fetch("http://127.0.0.1:5000/user/getregister", {
+
+  const urlDaPagina = window.location.href;
+  const idProjetc = urlDaPagina.match(/\/(\d+)(?:#|$)/)[1];
+
+
+  fetch("http://127.0.0.1:5000/user/getInscription", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(id) 
+    body: JSON.stringify({
+      "id_user": parseInt(getUser()),
+      "id_project": parseInt(idProjetc)
+    }) 
   })
 
   .then(response => {
@@ -19,8 +29,6 @@ button_inscrever.addEventListener("click", (e) =>{
           title: data.works,
           showConfirmButton: false,
           timer: 1500
-        }).then(() =>{
-            window.location = "http://127.0.0.1:5000/"
         })
       })
     }else{

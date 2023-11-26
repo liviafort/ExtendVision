@@ -68,6 +68,7 @@ def get_register_project():
 def get_project_student():
     """Rota para receber dados do formulário de criação de projeto"""
     data = request.json
+    print(data)
     paramters = ['id_project', 'id_user']
 
     if all([bool(data[key]) for key in paramters]):
