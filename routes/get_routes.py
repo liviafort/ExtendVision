@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template, jsonify, request, redirect, flash
-from entitys.Login import Login
-from entitys.Register import Register
-import requests
+from flask import Blueprint, jsonify, request
+from entitys.facade.Login import Login
+from entitys.facade.Register import Register
 
 app_get_routes = Blueprint('app_get_routes', __name__)
 #Rotas para obter respostas dos formulários
