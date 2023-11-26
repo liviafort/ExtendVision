@@ -41,7 +41,7 @@ def project(id):
     wait = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
     accepted = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Deferido"]
 
-    datas = {'projects': project, 'users_wait': wait, 'users_accepted': accepted}
+    datas = {'project': project, 'users_wait': wait, 'users_accepted': accepted}
 
     return render_template("projects/project.html", dados=datas)
 

@@ -143,7 +143,7 @@
                 <div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<h4>Participantes</h4>
+							<h4>Solicitações</h4>
 						</div>
 						<div class="card-body"> 
 						<div class="table-responsive"> 
@@ -159,13 +159,46 @@
 							</thead>
 							<tbody>
 
-								{% for alunos in dados.users %}
+								{% for alunos in dados.users_wait %}
 							  <tr>
 									<th scope="row">{{alunos.registration}}</th>
 									<td>{{alunos.name}}</td>
 									<td>{{alunos.email}}</td>
 									<td><button id="aceitar{{alunos.id}}" class="btn btn-primary">Aceitar</button></td>
 									<td><button id="rejeitar{{alunos.id}}" class="btn btn-primary">Rejeitar</button></td>
+                </tr>
+								{% endfor %}
+							</tbody>
+						  </table>
+						  </div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<h4>Participantes</h4>
+						</div>
+						<div class="card-body"> 
+						<div class="table-responsive"> 
+						<table class="table table-striped">
+							<thead>
+							  <tr>
+								<th scope="col">Matricula</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Email</th>
+							  </tr>
+							</thead>
+							<tbody>
+
+								{% for alunos in dados.users_accepted %}
+							  <tr>
+									<th scope="row">{{alunos.registration}}</th>
+									<td>{{alunos.name}}</td>
+									<td>{{alunos.email}}</td>
                 </tr>
 								{% endfor %}
 							</tbody>
