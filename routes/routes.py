@@ -93,7 +93,7 @@ def update_projects(id):
 def my_projects(id):
     facadeProject = FacadeProject()
     projects = facadeProject.get_project_by_id_professor(id)
-    return render_template("projects/my_projects.html", dados=projects)
+    return render_template("account/projects_professor.html", dados=projects)
 
 
 @app_routes.route('/student/account/myProjects/<int:id>', methods=['GET'])
