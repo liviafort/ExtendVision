@@ -2,32 +2,32 @@ from entitys.visitor.Visitor import Visitor
 from flask_mail import Message
 from flask import current_app
 
-from entitys.BdClass.BdUsers import BdUser
-from entitys.BdClass.BdField import BdField
+from entitys.facade.FacadeUsers import FacadeUser
+from entitys.facade.FacadeField import FacadeField
 
 
 class Registerisitor(Visitor):
     def __init__(self):
-        self.user = BdUser()
-        self.field = BdField()
+        self.facadeUser = FacadeUser()
+        self.facadeField = FacadeField()
 
     def responseUser(self, data):
         try:
-            data = self.user.get_user_by_id(data['id_professor'])
+            data = self.facadeUser.get_user_by_id(data['id_professor'])
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}
 
     def responseUsers(self):
         try:
-            data = self.user.get_users()
+            data = self.facadeUser.get_users()
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}
 
     def responseArea(self, data):
         try:
-            data = self.field.get_field_by_id(data['id_field'])
+            data = self.facadeField.get_field_by_id(data['id_field'])
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}

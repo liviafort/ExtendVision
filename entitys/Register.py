@@ -1,9 +1,9 @@
 from flask import jsonify
 from entitys.visitor.RegisterVisitor import Registerisitor
-from entitys.BdClass.BdUsers import BdUser
-from entitys.BdClass.BdField import BdField
-from entitys.BdClass.BdProject import BdProject
-from entitys.BdClass.BdProjectStudents import BdProjectStudents
+from entitys.facade.FacadeUsers import FacadeUser
+from entitys.facade.FacadeField import FacadeField
+from entitys.facade.FacadeProject import FacadeProject
+from entitys.facade.FacadeProjectStudents import FacadeProjectStudents
 from datetime import datetime
 import json
 import hashlib
@@ -12,43 +12,43 @@ import hashlib
 class Register:
     def __init__(self, data):
         self.data = data
-        self.user = BdUser()
-        self.field = BdField()
-        self.project = BdProject()
-        self.projectStudent = BdProjectStudents()
+        self.facadeUser = FacadeUser()
+        self.facadeField = FacadeField()
+        self.facadeProject = FacadeProject()
+        self.facadeProjectStudent = FacadeProjectStudents()
         print("ENTROU NA CLASSE")
 
     def responseEmail(self):
         try:
-            data = self.user.get_user_by_email(self.data['email'])
+            data = self.facadeUser.get_user_by_email(self.data['email'])
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}
 
     def responsePostUser(self):
         try:
-            data = self.user.create_user(self.data)
+            data = self.facadeUser.create_user(self.data)
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}
 
     def responseArea(self):
         try:
-            data = self.field.get_field_by_name(self.data['area'])
+            data = self.facadeField.get_field_by_name(self.data['area'])
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}
 
     def responsePostProject(self):
         try:
-            data = self.project.create_project(self.data)
+            data = self.facadeProject.create_project(self.data)
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}
 
     def responseProjectStudent(self):
         try:
-            data = self.projectStudent.create_project_student(self.data)
+            data = self.facadeProjectStudent.create_project_student(self.data)
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}
@@ -57,7 +57,7 @@ class Register:
         try:
             id_project = self.data['id_project']
             id_user = self.data['id_user']
-            data = self.projectStudent.update_project_students(id_project, id_user, self.data)
+            data = self.facadeProjectStudent.update_project_students(id_project, id_user, self.data)
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}

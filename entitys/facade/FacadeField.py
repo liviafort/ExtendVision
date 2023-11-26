@@ -1,7 +1,7 @@
-from entitys.BdClass.Bd import Bd
+from entitys.facade.Facade import Facade
 
 
-class BdField(Bd):
+class FacadeField(Facade):
     def get_fields(self):
         data = self.supabase_singleton.supabase.table("Field").select("*").execute()
         data = data.__dict__
