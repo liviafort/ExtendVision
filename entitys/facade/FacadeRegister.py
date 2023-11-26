@@ -9,7 +9,7 @@ import json
 import hashlib
 
 
-class Register:
+class FacadeRegister:
     def __init__(self, data):
         self.data = data
         self.user = BdUser()

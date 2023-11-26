@@ -3,7 +3,7 @@ from entitys.BdClass.BdUsers import BdUser
 import hashlib
 
 
-class Login:
+class FacadeLogin:
     def __init__(self, data):
         self.data = data
         self.user = BdUser()
