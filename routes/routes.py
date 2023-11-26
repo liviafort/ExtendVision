@@ -98,8 +98,13 @@ def update_projects(id):
 @app_routes.route('/professor/account/myProjects/<int:id>', methods=['GET'])
 def my_projects(id):
     Project = BdProject()
+    field = BdField()
     projects = Project.get_project_by_id_professor(id)
-    return render_template("account/projects_professor.html", dados=projects)
+    projects_field = list()
+    for i, project in enumerate(projects):
+        project['field'] = field.get_field_by_id(project['id_field'])['field']
+        projects_field.append(project)
+    return render_template("account/projects_professor.html", dados=projects_field)
 
 
 @app_routes.route('/student/account/myProjects/<int:id>', methods=['GET'])
