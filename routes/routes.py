@@ -9,6 +9,7 @@ app_routes = Blueprint('app_routes', __name__)
 
 #Rotas para as páginas principais da aplicação
 
+
 @app_routes.route('/')
 def login():
     return render_template("users/signin.html")
@@ -45,6 +46,7 @@ def project(id):
 
     return render_template("projects/project.html", dados=datas)
 
+
 @app_routes.route('/student/project/<int:id>', methods=['GET'])
 def project_student(id):
     facadeProject = FacadeProject()
@@ -73,13 +75,17 @@ def home_student():
 
 
 @app_routes.route('/student/profile/<int:id>', methods=['GET'])
-def profile_student():
-    return render_template("account/profile_student.html")
+def profile_student(id):
+    facadeUser = FacadeUser()
+    user = facadeUser.get_user_by_id(id)
+    return render_template("account/profile_student.html", dados=user)
 
 
 @app_routes.route('/professor/profile/<int:id>', methods=['GET'])
-def profile_professor():
-    return render_template("account/profile_professor.html")
+def profile_professor(id):
+    facadeUser = FacadeUser()
+    user = facadeUser.get_user_by_id(id)
+    return render_template("account/profile_professor.html", dados=user)
 
 
 @app_routes.route('/projects/update/<int:id>', methods=['GET'])
