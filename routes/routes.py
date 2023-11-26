@@ -40,7 +40,8 @@ def project(id):
     projectStudents = facadeProjectStudents.get_ps_by_project(id)
     students = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
 
-    datas = {'projects': project, 'users': students}
+    datas = {'project': project, 'users': students}
+    print(datas)
 
     return render_template("projects/project.html", dados=datas)
 
