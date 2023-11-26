@@ -103,6 +103,6 @@ def my_registrations_student(id):
     facadeProjectStudents = FacadeProjectStudents()
 
     projectStudents = facadeProjectStudents.get_ps_by_user(id)
-    projects = [facadeProject.get_project_by_id(profile_student['id_project']) for projectstudent in projectStudents if projectstudent['status'] != 'Deferido']
+    projects = [facadeProject.get_project_by_id(projectstudent['id_project']) for projectstudent in projectStudents if projectstudent['status'] != 'Deferido']
 
     return render_template("account/my_projects.html", dados=projects)
