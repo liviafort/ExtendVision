@@ -3,6 +3,7 @@ from entitys.facade.FacadeProject import FacadeProject
 from entitys.facade.FacadeProjectStudents import FacadeProjectStudents
 from entitys.facade.FacadeField import FacadeField
 
+
 app_routes = Blueprint('app_routes', __name__)
 
 #Rotas para as páginas principais da aplicação
@@ -26,12 +27,18 @@ def register_project():
 def project(id):
     facadeProject = FacadeProject()
     facadeField = FacadeField()
+    facadeUser = FacadeUser
 
     project = facadeProject.get_project_by_id(id)
     area = facadeField.get_field_by_id(project['id_field'])
     project['field'] = area
     
     project['user'] = int(request.cookies.get('user'))
+    
+    projectStudents = facadeProjectStudents.get_ps_by_project(id)
+    studets = [facadeUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
+    
+    project['alunos'] = studets
     
     return render_template("projects/project.html", dados=project)
 
@@ -100,6 +107,7 @@ def my_projects_student(id):
             project['field'] = facadeField.get_field_by_id(project['id_field'])['field']
             projects.append(project)
     print(projects)
+    
     return render_template("account/my_projects.html", dados=projects)
 
 
@@ -115,6 +123,7 @@ def my_registrations_student(id):
         if projectstudent['status'] != 'Deferido':
             project = facadeProject.get_project_by_id(projectstudent['id_project'])
             project['field'] = facadeField.get_field_by_id(project['id_field'])['field']
+            project['status'] = projectstudent['status']
             projects.append(project)
     print(projects)
 
