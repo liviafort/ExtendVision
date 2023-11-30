@@ -5,7 +5,6 @@ from entitys.facade.Register import Register
 app_get_routes = Blueprint('app_get_routes', __name__)
 #Rotas para obter respostas dos formulários
 
-
 @app_get_routes.route('/user/getlogin', methods=['POST'])
 def get_login():
     """Rota que recebe os dados do formulário de login"""
@@ -28,7 +27,6 @@ def get_login():
                 return jsonify({"error": "Erro ao entrar no sistema"}), 500
             
     return jsonify({"error": "Erro ao entrar no sistema"}), 500
-    # flash('Email ou Senha faltando') ##TESTE
 
 
 @app_get_routes.route("/user/getregister", methods=['POST'])

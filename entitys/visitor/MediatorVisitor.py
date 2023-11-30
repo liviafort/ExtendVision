@@ -21,7 +21,6 @@ class MediatorVisitor(Visitor):
         att,
         Equipe ExtendVision
         """
-
         return msg
 
     def visitarEmail(self, data):

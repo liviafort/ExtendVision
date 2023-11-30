@@ -144,7 +144,6 @@ def my_registrations_student(id):
     return render_template("account/my_registrations.html", dados=projects)
 
 
-
 @app_routes.route('/confirmEmail/<int:token>', methods=['GET'])
 def confirmEmail(token):
     status = Mediator().confirmaToken(token)

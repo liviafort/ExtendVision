@@ -3,6 +3,7 @@ from entitys.bdClasses.BdRegister import BdRegister
 from entitys.bdClasses.BdUsers import BdUser
 from entitys.visitor.MediatorVisitor import MediatorVisitor
 
+
 class Mediator:
     def __init__(self):
         print("Entrando no Mediador")

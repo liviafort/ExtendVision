@@ -42,5 +42,6 @@ class BdRegister(Bd):
         except:
             return {}
 
+
 if __name__ == '__main__':
     pass
