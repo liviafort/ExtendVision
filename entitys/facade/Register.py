@@ -4,6 +4,7 @@ from entitys.bdClasses.BdUsers import BdUser
 from entitys.bdClasses.BdField import BdField
 from entitys.bdClasses.BdProject import BdProject
 from entitys.bdClasses.BdProjectStudents import BdProjectStudents
+from entitys.mediator.mediator import Mediator
 from datetime import datetime
 import json
 import hashlib
@@ -21,13 +22,6 @@ class Register:
     def responseEmail(self):
         try:
             data = self.bdUser.get_user_by_email(self.data['email'])
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
-
-    def responsePostUser(self):
-        try:
-            data = self.bdUser.create_user(self.data)
             return {'json': data, 'status': 200}
         except:
             return {'json': {}, 'status': 404}
@@ -64,6 +58,13 @@ class Register:
 
     def get_data(self):
         return self.data
+    
+    def finishRegister(self):
+        try:
+            data = self.bdUser.create_user(self.data)
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
 
     def student_or_professor(self):
         local_part, domain = self.data['email'].split("@")
@@ -120,19 +121,27 @@ class Register:
         print("DATA DE NASCIMENTO VÁLIDA")
 
         try:
-            print("CRIANDO DADOS PARA INSERIR NO BANCO")
-            response = self.responsePostUser()
-            print("RESPONSE DO BD")
-            # print(response)
+            # print("CRIANDO DADOS PARA INSERIR NO BANCO")
+            # response = self.responsePostUser()
+            # print("RESPONSE DO BD")
+            # # print(response)
 
-            if response['status'] == 200:
-                 print("USUÁRIO CRIADO")
-                 return response['json'], True
+            # if response['status'] == 200:
+            #      print("USUÁRIO CRIADO")
+            #      return response['json'], True
             
-            return response['json'], False
+            # return response['json'], False
+
+            print("Chamando mediator")
+            status = Mediator().confirmaEmail(self.data)
+
+            if status:
+                return {'message':'Email enviado'}, True
+            return {'error':'Email não enviado'}, False
 
         except Exception as e:
             print(e)
+            return {'error':'Email não enviado'}, False
 
     def registrar_projeto(self):
         """Realiza o cadastro de um projeto no banco de dados"""

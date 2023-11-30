@@ -42,7 +42,7 @@ def get_register():
         message, its_work = register.registrar()
             
         if its_work:
-            return jsonify({"works": "Conta criada com sucesso!"})
+            return jsonify({"works": "Verifique sua caixa de emails"})
     
     return jsonify({"error": "Erro ao efetuar cadastro"}), 500
 

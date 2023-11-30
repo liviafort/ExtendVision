@@ -3,7 +3,7 @@ from entitys.bdClasses.BdUsers import BdUser
 from entitys.bdClasses.BdProject import BdProject
 from entitys.bdClasses.BdProjectStudents import BdProjectStudents
 from entitys.bdClasses.BdField import BdField
-
+from entitys.mediator.mediator import Mediator
 
 app_routes = Blueprint('app_routes', __name__)
 
@@ -142,3 +142,12 @@ def my_registrations_student(id):
     print(projects)
 
     return render_template("account/my_registrations.html", dados=projects)
+
+
+
+@app_routes.route('/confirmEmail/<int:token>', methods=['GET'])
+def confirmEmail(token):
+    status = Mediator().confirmaToken(token)
+    if status:
+        return render_template("users/confirmEmail.html")
+    return redirect("/")
