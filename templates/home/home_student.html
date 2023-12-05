@@ -14,23 +14,25 @@
 				
 				<!-- Card Start -->
 				{% for projeto in dados %}
-				<div class="col-xl-4 col-md-6 col-sm-12">
-					<div class="card">
-						<div class="card-content">
-							<div class="card-body">
-								<h4 class="card-title">{{ projeto.title }}</h4>
-								<p class="card-text">
-									{{ projeto.description }}
-								</p>
-							</div>
-						</div>
-						<div class="card-footer d-flex justify-content-between">
-							<span>Card Footer</span>
-							<a id="project" href="http://127.0.0.1:5000/student/project/{{projeto.id}}" class="btn btn-light-primary">Saiba mais</a>
-						</div>
-					</div>
+	<div class="col-xl-4 col-md-6 col-sm-12">
+		<div class="card" style="height: 100%;">
+			<div class="card-content" style="max-height: 200px; overflow: auto;">
+				<div class="card-body">
+					<h4 class="card-title">{{ projeto.title }}</h4>
+					<p class="card-text">
+						{{ projeto.description }}
+					</p>
 				</div>
-				{% endfor %}
+			</div>
+			<div class="card-footer d-flex justify-content-between" style="padding-top: 10px; padding-bottom: 10px;">
+				<span>Card Footer</span>
+				<a id="project" href="http://127.0.0.1:5000/student/project/{{projeto.id}}" class="btn btn-light-primary" style="margin-top: 40px;"> <!-- Adicionando margin-top ao botão "Saiba mais" -->
+					Saiba mais
+				</a>
+			</div>
+		</div>
+	</div>
+{% endfor %}
 				<!-- End Card Start -->
 		
             </div><!-- End Container-->

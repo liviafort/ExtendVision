@@ -6,7 +6,8 @@
             <div class="container-fluid dashboard">
                 <div class="card-content">
 						<div class="card-footer text-right">
-						<h1 class="card-title">{{dados.title}}</h1>
+                            <h1 class="card-title">{{dados.title}}</h1>
+                            <h5 id="professor_name"></h5>
                         <button id="inscrever" class="btn btn-primary">INSCREVER-SE</a>
                     </div>
                 </div>
@@ -18,7 +19,7 @@
 								<h4 class="card-title">Resumo</h4>
 							</div>
 							<div class="card-content">
-								<div class="card-body">
+								<div class="card-body" style="height: 300px; overflow: auto;">
 									<p>
 										{{dados.description}}
 									</p>
@@ -32,7 +33,7 @@
 								<h4 class="card-title">Informações Adicionais</h4>
 							</div>
                             <div class="card-content">
-                                <div class="card-body">
+                                <div class="card-body" style="height: 300px; overflow: auto;">
                                     <div class="list-group">
                                         <a href="#" class="list-group-item list-group-item-action">
                                             <div class="d-flex w-100 justify-content-between">
@@ -70,7 +71,7 @@
                             <div class="card-header">
                                 <h4 class="card-title">Descrição</h4>
                             </div>
-                                <div class="card-body">
+                                <div class="card-body" style="height: 400px; overflow: auto;">
                                     <div class="list-group">
                                         <a href="#" class="list-group-item list-group-item-action">
                                             <div class="d-flex w-100 justify-content-between">
@@ -97,7 +98,7 @@
                             <div class="card-header">
                                 <h4 class="card-title">Datas</h4>
                             </div>
-                                <div class="card-body">
+                                <div class="card-body" style="height: 400px; overflow: auto;">
                                     <div class="list-group">
                                         <a href="#" class="list-group-item list-group-item-action">
                                             <div class="d-flex w-100 justify-content-between">
@@ -185,6 +186,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="{{ url_for('static', filename='scripts/project/button_project.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='scripts/project/student_register.js') }}"></script>
+    <script>
+        var professor = "{{dados.id_professor}}"
+    </script>
+	<script type="module" src="{{ url_for('static', filename='scripts/project/professor_name.js') }}"></script>
 
  </body>
 </html>
