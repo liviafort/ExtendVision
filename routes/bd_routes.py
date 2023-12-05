@@ -15,6 +15,14 @@ bdProjectStudents = BdProjectStudents()
 app_bd = Blueprint('app_bd', __name__)
 
 #CRUD USER
+
+@app_bd.route('/user/<int:user_id>', methods=['GET'])
+def update_user_id(user_id):
+    try:
+        return bdUser.get_user_by_id(user_id)
+    except:
+         return jsonify({'error':'ID nao encontrado'}), 404
+
 @app_bd.route('/user/', methods=['GET'])
 def get_user():
     user_id = request.args.get("user_id")

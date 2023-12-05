@@ -9,21 +9,17 @@ app_routes = Blueprint('app_routes', __name__)
 
 #Rotas para as páginas principais da aplicação
 
-
 @app_routes.route('/')
 def login():
     return render_template("users/signin.html")
-
 
 @app_routes.route('/register')
 def register():
     return render_template("users/signup.html")
 
-
 @app_routes.route('/projects/register')
 def register_project():
     return render_template("projects/register.html")
-
 
 @app_routes.route('/projects/project/<int:id>', methods=['GET'])
 def project(id):
@@ -55,7 +51,6 @@ def project_student(id):
     project = bdProject.get_project_by_id(id)
     area = bdField.get_field_by_id(project['id_field'])['field']
     project['field'] = area
-
     return render_template("projects/project_student.html", dados=project)
 
 
