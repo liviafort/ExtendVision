@@ -80,7 +80,7 @@ def create_project_route():
     required_fields = ['id_professor','id_field','title','theme','description','begin_date','end_date','register_begin','register_end','workload','available_spots','scholarship']
     if not all(field in data for field in required_fields):
         return jsonify({'error': 'Campos obrigatórios ausentes'}), 400
-    new_project_id = bdProject.create_project(data)
+    new_project_id = (bdProject.create_project(data))["json"]
 
     return jsonify({'message': 'Novo Projeto criado com sucesso', 'Project_id': new_project_id})
 
@@ -109,10 +109,10 @@ def get_field_by_id_route():
     field_name = request.args.get('field_name')
 
     if field_id:
-        return bdField.get_field_by_id(field_id)
+        return (bdField.get_field_by_id(field_id))["json"]
     
     elif field_name:
-        return bdField.get_field_by_name(field_name)
+        return (bdField.get_field_by_name(field_name))["json"]
     
     return bdField.get_fields()
 
@@ -155,26 +155,25 @@ def get_project_students_route():
 
     if user_id: 
         #exemplode url: http://127.0.0.1:5000/project_students?user_id=25
-        return bdProjectStudents.get_ps_by_user(user_id)
+        return (bdProjectStudents.get_ps_by_user(user_id))["json"]
     
     elif project_id:
         if user_accepted == "True":
             projectStudents = bdProjectStudents.get_ps_by_project(project_id)
-            studets = [bdUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Deferido"]
+            studets = [(bdUser.get_user_by_id(ps['id_user']))["json"] for ps in projectStudents if ps['status'] == "Deferido"]
             return studets
         
         elif user_accepted == "False":
             projectStudents = bdProjectStudents.get_ps_by_project(project_id)
-            studets = [bdUser.get_user_by_id(ps['id_user']) for ps in projectStudents if ps['status'] == "Espera"]
+            studets = [(bdUser.get_user_by_id(ps['id_user']))["json"] for ps in projectStudents if ps['status'] == "Espera"]
             return studets
     
         else:
             projectStudents = bdProjectStudents.get_ps_by_project(project_id)
-            studets = [bdUser.get_user_by_id(ps['id_user']) for ps in projectStudents]
+            studets = [(bdUser.get_user_by_id(ps['id_user']))["json"] for ps in projectStudents]
             return studets
             
     else:
-        #exemplo de url: http://127.0.0.1:5000/project_students
         return bdProjectStudents.get_project_students()
 
 
@@ -184,7 +183,7 @@ def create_project_students_route():
     required_fields = ['id_project', 'id_user']
     if not all(field in data for field in required_fields):
         return jsonify({'error': 'Campos obrigatórios ausentes'}), 400
-    new_project_students_id = bdProjectStudents.create_project_student(data)
+    new_project_students_id = (bdProjectStudents.create_project_student(data))["json"]
 
     return jsonify({'message': 'Novo relação Projeto-Estudante criada', 'Project_id': new_project_students_id[0], 'User_id': new_project_students_id[1]})
 
@@ -201,7 +200,7 @@ def update_project_students_route():
         if not all(field in data for field in required_fields):
             return jsonify({'error': 'Campos obrigatórios ausentes'}), 400
         
-        new_project_students_id = bdProjectStudents.update_project_students(project_id, user_id, data)
+        new_project_students_id = (bdProjectStudents.update_project_students(project_id, user_id, data))["json"]
 
         return jsonify({'message': 'Relação Projeto-Estudante Atualizada', 'Project_id': new_project_students_id[0], 'User_id': new_project_students_id[1]})
     

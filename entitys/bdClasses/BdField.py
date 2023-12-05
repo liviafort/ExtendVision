@@ -8,14 +8,22 @@ class BdField(Bd):
         return data['data']
 
     def get_field_by_id(self, field_id):
-        data = self.supabase_singleton.supabase.table("Field").select('*').eq('id', field_id).execute()
-        data = data.__dict__
-        return data['data'][0]
+        try:
+            data = self.supabase_singleton.supabase.table("Field").select('*').eq('id', field_id).execute()
+            data = data.__dict__
+            data = data['data'][0]
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
 
     def get_field_by_name(self, field_name):
-        data = self.supabase_singleton.supabase.table("Field").select('*').eq('field', field_name).execute()
-        data = data.__dict__
-        return data['data'][0]
+        try:
+            data = self.supabase_singleton.supabase.table("Field").select('*').eq('field', field_name).execute()
+            data = data.__dict__
+            data = data['data'][0]
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
 
     def create_field(self, informations):
         data = self.supabase_singleton.supabase.table("Field").insert(informations).execute()

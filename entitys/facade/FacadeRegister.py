@@ -18,52 +18,42 @@ class FacadeRegister:
         self.bdProject = BdProject()
         self.bdProjectStudent = BdProjectStudents()
 
-    def responseEmail(self):
-        try:
-            data = self.bdUser.get_user_by_email(self.data['email'])
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
+    # def responseEmail(self):
+    #     try:
+    #         data = self.bdUser.get_user_by_email(self.data['email'])
+    #         return {'json': data, 'status': 200}
+    #     except:
+    #         return {'json': {}, 'status': 404}
 
-    def responseArea(self):
-        try:
-            data = self.bdField.get_field_by_name(self.data['area'])
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
+    # def responseArea(self):
+    #     try:
+    #         data = self.bdField.get_field_by_name(self.data['area'])
+    #         return {'json': data, 'status': 200}
+    #     except:
+    #         return {'json': {}, 'status': 404}
 
-    def responsePostProject(self):
-        try:
-            data = self.bdProject.create_project(self.data)
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
+    # def responsePostProject(self):
+    #     try:
+    #         data = self.bdProject.create_project(self.data)
+    #         return {'json': data, 'status': 200}
+    #     except:
+    #         return {'json': {}, 'status': 404}
 
-    def responseProjectStudent(self):
-        try:
-            data = self.bdProjectStudent.create_project_student(self.data)
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
+    # def responseProjectStudent(self):
+    #     try:
+    #         data = self.bdProjectStudent.create_project_student(self.data)
+    #         return {'json': data, 'status': 200}
+    #     except:
+    #         return {'json': {}, 'status': 404}
 
     def responseUpdateProjectStudent(self):
-        try:
-            id_project = self.data['id_project']
-            id_user = self.data['id_user']
-            data = self.bdProjectStudent.update_project_students(id_project, id_user, self.data)
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
+        id_project = self.data['id_project']
+        id_user = self.data['id_user']
+        data = self.bdProjectStudent.update_project_students(id_project, id_user, self.data)
+        return data
 
     def get_data(self):
         return self.data
-    
-    def finishRegister(self):
-        try:
-            data = self.bdUser.create_user(self.data)
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
 
     def student_or_professor(self):
         local_part, domain = self.data['email'].split("@")
@@ -107,7 +97,7 @@ class FacadeRegister:
             return jsonify({"error": "Email acadêmico não detectado"}), False
         print("EMAIL È DO IFPB")
         
-        response = self.responseEmail()
+        response = self.bdUser.get_user_by_email(self.data['email'])
         if response['status'] == 200:
             return jsonify({"error":"Email já cadastrado"}), False
         print("EMAIL NÃO EXISTE NO BD")
@@ -120,17 +110,6 @@ class FacadeRegister:
         print("DATA DE NASCIMENTO VÁLIDA")
 
         try:
-            # print("CRIANDO DADOS PARA INSERIR NO BANCO")
-            # response = self.responsePostUser()
-            # print("RESPONSE DO BD")
-            # # print(response)
-
-            # if response['status'] == 200:
-            #      print("USUÁRIO CRIADO")
-            #      return response['json'], True
-            
-            # return response['json'], False
-
             print("Chamando mediator")
             status = Mediator().confirmaEmail(self.data)
 
@@ -145,11 +124,11 @@ class FacadeRegister:
     def registrar_projeto(self):
         """Realiza o cadastro de um projeto no banco de dados"""
 
-        response = self.responseEmail()
+        response = self.bdUser.get_user_by_email(self.data['email'])
         data = response['json']
         self.data['id_professor'] = data['id']
 
-        response = self.responseArea()
+        response = self.bdField.get_field_by_name(self.data['area'])
         data = response['json']
         self.data['id_field'] = data['id']
         
@@ -157,7 +136,7 @@ class FacadeRegister:
         del self.data['area']
 
         try:
-            response = self.responsePostProject()
+            response = self.bdProject.create_project(self.data)
             print("RESPONSE DO BD")
             print(response)
 
@@ -165,8 +144,6 @@ class FacadeRegister:
                 print("LINHA CRIADA")
                 visitor = Registerisitor()
 
-                # thread = threading.Thread(target=self.accept, args=(visitor,))
-                # thread.start()
                 self.accept(visitor)
 
                 return response['json'], True
@@ -178,7 +155,7 @@ class FacadeRegister:
     def registrar_projeto_estudante(self):
         self.data['status'] = 'Espera'
         print(self.data)
-        response = self.responseProjectStudent()
+        response = self.bdProjectStudent.create_project_student(self.data)
         if response['status'] == 200:
             print("LINHA CRIADA")
             return response['json'], True

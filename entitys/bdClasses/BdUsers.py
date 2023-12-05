@@ -3,19 +3,31 @@ from entitys.bdClasses.Bd import Bd
 
 class BdUser(Bd):
     def get_user_by_id(self, user_id):
-        data = self.supabase_singleton.supabase.table("User").select("*").eq("id", user_id).execute()
-        data = data.__dict__
-        return data['data'][0]
+        try:
+            data = self.supabase_singleton.supabase.table("User").select("*").eq("id", user_id).execute()
+            data = data.__dict__
+            data = data['data'][0]
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
 
     def get_user_by_email(self, user_email):
-        data = self.supabase_singleton.supabase.table("User").select("*").eq("email", user_email).execute()
-        data = data.__dict__
-        return data['data'][0]
+        try:
+            data = self.supabase_singleton.supabase.table("User").select("*").eq("email", user_email).execute()
+            data = data.__dict__
+            data = data['data'][0]
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
 
     def get_users(self):
-        data = self.supabase_singleton.supabase.table("User").select("*").execute()
-        data = data.__dict__
-        return data['data']
+        try:
+            data = self.supabase_singleton.supabase.table("User").select("*").execute()
+            data = data.__dict__
+            data = data['data']
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
 
     def create_user(self, data):
         data = self.supabase_singleton.supabase.table("User").insert(data).execute()

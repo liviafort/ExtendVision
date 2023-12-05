@@ -7,14 +7,14 @@ class FacadeLogin:
     def __init__(self, data):
         self.data = data
         self.bdUser = BdUser()
-        self.response = self.responseEmail()
+        self.response = self.bdUser.get_user_by_email(self.data['email'])
 
-    def responseEmail(self):
-        try:
-            data = self.bdUser.get_user_by_email(self.data['email'])
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
+    # def responseEmail(self):
+    #     try:
+    #         data = self.bdUser.get_user_by_email(self.data['email'])
+    #         return {'json': data, 'status': 200}
+    #     except:
+    #         return {'json': {}, 'status': 404}
 
     def test_hashing_password(self):
         hash_object = hashlib.new("SHA256")
@@ -23,7 +23,7 @@ class FacadeLogin:
         self.data['password'] = hash_object.hexdigest()
 
     def user_id(self):
-        response = self.responseEmail()
+        response = self.bdUser.get_user_by_email(self.data['email'])
         if response['status'] == 200:
             return response['json']['id']
         return -1

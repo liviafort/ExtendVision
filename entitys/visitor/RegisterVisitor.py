@@ -11,36 +11,36 @@ class Registerisitor(Visitor):
         self.bdUser = BdUser()
         self.bdField = BdField()
 
-    def responseUser(self, data):
-        try:
-            data = self.bdUser.get_user_by_id(data['id_professor'])
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
+    # def responseUser(self, data):
+    #     try:
+    #         data = self.bdUser.get_user_by_id(data['id_professor'])
+    #         return {'json': data, 'status': 200}
+    #     except:
+    #         return {'json': {}, 'status': 404}
 
-    def responseUsers(self):
-        try:
-            data = self.bdUser.get_users()
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
+    # def responseUsers(self):
+    #     try:
+    #         data = self.bdUser.get_users()
+    #         return {'json': data, 'status': 200}
+    #     except:
+    #         return {'json': {}, 'status': 404}
 
-    def responseArea(self, data):
-        try:
-            data = self.bdField.get_field_by_id(data['id_field'])
-            return {'json': data, 'status': 200}
-        except:
-            return {'json': {}, 'status': 404}
+    # def responseArea(self, data):
+    #     try:
+    #         data = self.bdField.get_field_by_id(data['id_field'])
+    #         return {'json': data, 'status': 200}
+    #     except:
+    #         return {'json': {}, 'status': 404}
 
     def create_message(self, instance):
         data = instance.get_data()
-        response = self.responseUser(data)
+        response = self.bdUser.get_user_by_id(data['id_professor'])
         professor = response['json']['name']
 
-        response = self.responseArea(data)
+        response = self.bdField.get_field_by_id(data['id_field'])
         area = response['json']['field']
 
-        response = self.responseUsers()
+        response = self.bdUser.get_users()
         students = [student['email'] for student in response['json'] if student['title'] == 'student']
 
         msg = Message(f'ExtendVision: Novo projeto adicionado - {data["theme"]}', recipients=students)

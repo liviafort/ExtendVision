@@ -21,10 +21,13 @@ class BdProject(Bd):
         return data['data']
 
     def create_project(self, data):
-        data = self.supabase_singleton.supabase.table("Project").insert(data).execute()
-
-        data = data.__dict__
-        return data['data'][0]['id']
+        try:
+            data = self.supabase_singleton.supabase.table("Project").insert(data).execute()
+            data = data.__dict__
+            data = data['data'][0]['id']
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
 
     def update_project(self, project_id, informations):
         data = self.supabase_singleton.supabase.table("Project").update(informations).eq('id', project_id).execute()

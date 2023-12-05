@@ -21,14 +21,22 @@ class BdProjectStudents(Bd):
         return data['data']
 
     def create_project_student(self, informations):
-        data = self.supabase_singleton.supabase.table("ProjectStudents").insert(informations).execute()
-        data = data.__dict__
-        return (data['data'][0]['id_project'], data['data'][0]['id_user'])
+        try:
+            data = self.supabase_singleton.supabase.table("ProjectStudents").insert(informations).execute()
+            data = data.__dict__
+            data = (data['data'][0]['id_project'], data['data'][0]['id_user'])
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
 
     def update_project_students(self, old_id_project, old_id_user, informations):
-        data = self.supabase_singleton.supabase.table("ProjectStudents").update(informations).match({'id_project': old_id_project,'id_user':old_id_user}).execute()
-        data = data.__dict__
-        return (data['data'][0]['id_project'], data['data'][0]['id_user'])
+        try:
+            data = self.supabase_singleton.supabase.table("ProjectStudents").update(informations).match({'id_project': old_id_project,'id_user':old_id_user}).execute()
+            data = data.__dict__
+            data = (data['data'][0]['id_project'], data['data'][0]['id_user'])
+            return {'json': data, 'status': 200}
+        except:
+            return {'json': {}, 'status': 404}
 
     def delete_project_students(self, id_project, id_user):
         data = self.supabase_singleton.supabase.table("ProjectStudents").delete().match({'id_project': id_project,'id_user':id_user}).execute()
