@@ -3,7 +3,7 @@ from entitys.bdClasses.BdUsers import BdUser
 import hashlib
 
 
-class Login:
+class FacadeLogin:
     def __init__(self, data):
         self.data = data
         self.bdUser = BdUser()
@@ -21,6 +21,12 @@ class Login:
         data = self.data['password']
         hash_object.update(data.encode('utf-8'))
         self.data['password'] = hash_object.hexdigest()
+
+    def user_id(self):
+        response = self.responseEmail()
+        if response['status'] == 200:
+            return response['json']['id']
+        return -1
 
     def valida_login(self):
         """Verifica se o usuário e senha existem no banco de dados"""
@@ -45,8 +51,3 @@ class Login:
 
         return jsonify({"error": "Email invalida"}), "error"
     
-    def user_id(self):
-        response = self.responseEmail()
-        if response['status'] == 200:
-            return response['json']['id']
-        return -1

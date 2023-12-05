@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
-from entitys.facade.Login import Login
-from entitys.facade.Register import Register
+from entitys.facade.FacadeLogin import FacadeLogin
+from entitys.facade.FacadeRegister import FacadeRegister
 
 app_get_routes = Blueprint('app_get_routes', __name__)
 #Rotas para obter respostas dos formulários
@@ -12,7 +12,7 @@ def get_login():
     data = request.json
 
     if data['email'] and data['password']:
-        login = Login(data)
+        login = FacadeLogin(data)
         message, its_valid = login.valida_login()
         print(message)
 
@@ -36,7 +36,7 @@ def get_register():
     paramters = ['email', 'name', 'password', 'gender', 'registration', 'birth']
 
     if all([bool(data[key]) for key in paramters]):
-        register = Register(data)
+        register = FacadeRegister(data)
         message, its_work = register.registrar()
             
         if its_work:
@@ -52,7 +52,7 @@ def get_register_project():
     paramters = ['email', 'area', 'theme', 'title', 'description', 'begin_date', 'end_date', 'register_begin', 'register_end', 'workload', 'available_spots', 'scholarship']
 
     if all([bool(data[key]) for key in paramters]):
-        register = Register(data)
+        register = FacadeRegister(data)
         message, its_work = register.registrar_projeto()
 
         if its_work:
@@ -69,7 +69,7 @@ def get_project_student():
     paramters = ['id_project', 'id_user']
 
     if all([bool(data[key]) for key in paramters]):
-        register = Register(data)
+        register = FacadeRegister(data)
         message, its_work = register.registrar_projeto_estudante()
 
         if its_work:
@@ -85,7 +85,7 @@ def get_inscription_aprove():
     paramters = ['id_project', 'id_user']
 
     if all([bool(data[key]) for key in paramters]):
-        register = Register(data)
+        register = FacadeRegister(data)
         message, its_work = register.aceitar_solitacao()
 
         if its_work:
@@ -101,7 +101,7 @@ def get_inscription_refused():
     paramters = ['id_project', 'id_user']
 
     if all([bool(data[key]) for key in paramters]):
-        register = Register(data)
+        register = FacadeRegister(data)
         message, its_work = register.recusar_solitacao()
 
         if its_work:

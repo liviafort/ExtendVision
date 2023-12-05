@@ -10,14 +10,13 @@ import json
 import hashlib
 
 
-class Register:
+class FacadeRegister:
     def __init__(self, data):
         self.data = data
         self.bdUser = BdUser()
         self.bdField = BdField()
         self.bdProject = BdProject()
         self.bdProjectStudent = BdProjectStudents()
-        print("ENTROU NA CLASSE")
 
     def responseEmail(self):
         try:
@@ -156,7 +155,7 @@ class Register:
         
         del self.data['email']
         del self.data['area']
-        
+
         try:
             response = self.responsePostProject()
             print("RESPONSE DO BD")
@@ -203,3 +202,4 @@ class Register:
 
     def accept(self, visitor):
         visitor.visitarEmail(self)
+
