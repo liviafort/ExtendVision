@@ -288,7 +288,11 @@
 
 	<script src="../../static/assets/js/script.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+		var professor = "{{dados.id_professor}}"
+	</script>
   <script type="module" src="{{ url_for('static', filename='scripts/project/project.js') }}"></script>
+	<script type="module" src="{{ url_for('static', filename='scripts/project/professor_name.js') }}"></script>
 
  </body>
 </html>
